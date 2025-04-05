@@ -1,5 +1,7 @@
 import { parseQuestions } from '../utils/dataParser.js';
-
+/**
+ * Test function. Parses the hardcoded sector questions and displays it in the console.
+ */
 const testParser = async () => {
   try {
     const sector = 'energy';
@@ -24,7 +26,7 @@ const testParser = async () => {
         console.log(`      Tags Question: ${JSON.stringify(answer.tagsQuestion)}`);
       });
 
-      console.log('\n'); // Add spacing between questions
+      console.log('\n'); 
     });
   } catch (error) {
     console.error('Error testing parser:', error);

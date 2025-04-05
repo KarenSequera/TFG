@@ -1,9 +1,13 @@
 import Papa from 'papaparse';
 import fs from 'fs/promises';
-//import Honeypot from '../models/Honeypot.js';
+import Honeypot from '../models/Honeypot.js';
 import Question from '../models/Question.js';
 import Answer from '../models/Answer.js';
-
+/**
+ * This funtion parses the TAGS to lists of lists according the pattern used in the CSV: "[TAG1,TAG2],[TAG3,TAG4]"
+ * @param {string} tags - string containing the TAGS data
+ * @returns {string[]}- returns a list of lists of strings with the tags content
+ */
 const parseTags = (tags) => {
     if (!tags) return []; // If tags are empty, return an empty array
   
@@ -22,9 +26,12 @@ const parseTags = (tags) => {
     }
 };
 
+/**
+ * This function parses que questions from a csv.
+ * @param {string} sector - The sector that is going to be parsed.
+ * @returns {Question[]} - A list containing the questions
+ */
 export const parseQuestions = async (sector) => {
-
-
     const csvFilePath = `./data/questionnaires/${sector}.csv`;
     const csvContent = await fs.readFile(csvFilePath, 'utf-8');
 
@@ -48,7 +55,7 @@ export const parseQuestions = async (sector) => {
   
               // New Question Object created
               currentQuestion = new Question({
-                tags: row.TAGS ? parseTags(row.TAGS) : [],
+                tags: row.Tags ? parseTags(row.Tags) : [],
                 text: row.Questions,
                 answers: [],
                 active: row.QuestionActive === 'TRUE',
@@ -81,4 +88,45 @@ export const parseQuestions = async (sector) => {
     });
   };
 
-//export const parseHoneypots = async (sector) => {}
+/**
+ * This function parses the honeypots from a csv. 
+ * @param {string} sector - The sector that is going to be parsed. 
+ * @returns {Honeypot[]} - A list of honeypots. 
+ */
+export const parseHoneypots = async (sector) => {
+  const csvFilePath = `./data/honeypots/${sector}.csv`;
+  const csvContent = await fs.readFile(csvFilePath, 'utf-8');
+
+  return new Promise((resolve, reject) => {
+    Papa.parse(csvContent, {
+      header: true,
+      skipEmptyLines: true,
+      complete: (result) => {
+        const data = result.data;
+      
+        const honeypots = []; // Stores all the honeypots that are parsed
+        let currentHoneypot = null; // Stores the current honeypot that is being parsed
+
+        data.forEach((row) => {
+          // New Honeypot Object created
+          currentHoneypot = new Honeypot({
+            tags: parseTags(row.Tags),
+            objective: row.Objective,
+            location: row.Location,
+            description: row.Description,
+            mitreTactic: row.Mitre,
+            initialScore: parseInt(row.InitialScore, 10),
+            currentScore: parseInt(row.InitialScore, 10),
+          });
+
+          if (currentHoneypot) {
+            honeypots.push(currentHoneypot);
+          }
+
+        });
+        resolve(honeypots);
+      },
+      error: (error) => reject(error),
+    });
+  });
+};
