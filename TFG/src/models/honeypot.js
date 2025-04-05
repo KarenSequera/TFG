@@ -42,4 +42,4 @@ class Honeypot {
     }
 }
   
-  export default Honeypot;
+export default Honeypot;

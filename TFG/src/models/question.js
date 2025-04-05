@@ -1,5 +1,6 @@
 class Question {
-    constructor({ tags = [],
+    constructor({ 
+        tags = [],
         text = '',
         answers = [],
         active = true

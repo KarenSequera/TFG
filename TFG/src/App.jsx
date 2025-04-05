@@ -12,7 +12,7 @@ function App() {
         margin: "0 auto",
         alignItems:"center"
     }}
->
+    >
     <div><h1> TITLE  </h1></div>
 
 </div>
