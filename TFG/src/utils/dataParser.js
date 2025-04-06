@@ -1,5 +1,4 @@
 import Papa from 'papaparse';
-import fs from 'fs/promises';
 import Honeypot from '../models/Honeypot.js';
 import Question from '../models/Question.js';
 import Answer from '../models/Answer.js';
@@ -32,61 +31,62 @@ const parseTags = (tags) => {
  * @returns {Question[]} - A list containing the questions
  */
 export const parseQuestions = async (sector) => {
-    const csvFilePath = `./data/questionnaires/${sector}.csv`;
-    const csvContent = await fs.readFile(csvFilePath, 'utf-8');
+  const csvFilePath = `./questionnaires/${sector}.csv`;
+  const response = await fetch(csvFilePath);
+  const csvContent = await response.text();
 
-    return new Promise((resolve, reject) => {
-      Papa.parse(csvContent, {
-        header: true,
-        skipEmptyLines: true,
-        complete: (result) => {
+  const questions = []; // Stores all the questions that are parsed
+  let currentQuestion = null; // Stores the current question that is being parsed
+
+  Papa.parse(csvContent, {
+      header: true,
+      skipEmptyLines: true,
+      complete: (result) => {
           const data = result.data;
-        
-          const questions = []; // Stores all the questions that are parsed
-          let currentQuestion = null; // Stores the current question that is being parsed
-  
+
           data.forEach((row) => {
-            // If the row contains content in the question column, we are in a new question
-            if (row.Questions) {
-              // The old question has been filled and needs to be pushed
-              if (currentQuestion) {
-                questions.push(currentQuestion);
+              // If the row contains content in the question column, we are in a new question
+              if (row.Questions) {
+                  // The old question has been filled and needs to be pushed
+                  if (currentQuestion) {
+                      questions.push(currentQuestion);
+                  }
+
+                  // New Question Object created
+                  currentQuestion = new Question({
+                      tags: row.Tags ? parseTags(row.Tags) : [],
+                      text: row.Questions,
+                      answers: [],
+                      active: row.QuestionActive === 'TRUE',
+                  });
               }
-  
-              // New Question Object created
-              currentQuestion = new Question({
-                tags: row.Tags ? parseTags(row.Tags) : [],
-                text: row.Questions,
-                answers: [],
-                active: row.QuestionActive === 'TRUE',
-              });
-            }
-  
-            // We check if the object current question is created and if the answer row contains something
-            if (currentQuestion && row.Answer) {
-                const answer = new Answer({
-                    text: row.Answer,
-                    tagsAdd: row.AddPointsHoneypotTags ? parseTags(row.AddPointsHoneypotTags) : [],
-                    pointsToAdd: row.PointsToAdd ? parseInt(row.PointsToAdd, 10) : 0,
-                    tagsSubtract: row.SubstractPointsHoneypotTags ? parseTags(row.SubstractPointsHoneypotTags) : [],
-                    pointsToSubstract: row.PointsToSubstract ? parseInt(row.PointsToSubstract, 10) : 0,
-                    tagsQuestion: row.EnableQuestionTags ? parseTags(row.EnableQuestionTags) : [],
-                });
-              // The new question is pushed
-              currentQuestion.answers.push(answer);
-            }
+
+              // We check if the object current question is created and if the answer row contains something
+              if (currentQuestion && row.Answer) {
+                  const answer = new Answer({
+                      text: row.Answer,
+                      tagsAdd: row.AddPointsHoneypotTags ? parseTags(row.AddPointsHoneypotTags) : [],
+                      pointsToAdd: row.PointsToAdd ? parseInt(row.PointsToAdd, 10) : 0,
+                      tagsSubtract: row.SubstractPointsHoneypotTags ? parseTags(row.SubstractPointsHoneypotTags) : [],
+                      pointsToSubstract: row.PointsToSubstract ? parseInt(row.PointsToSubstract, 10) : 0,
+                      tagsQuestion: row.EnableQuestionTags ? parseTags(row.EnableQuestionTags) : [],
+                  });
+                  currentQuestion.answers.push(answer);
+              }
           });
-  
+
           // Push the last question to the list
           if (currentQuestion) {
-            questions.push(currentQuestion);
+              questions.push(currentQuestion);
           }
-          resolve(questions);
-        },
-        error: (error) => reject(error),
-      });
-    });
-  };
+      },
+      error: (error) => {
+          console.error("Error parsing CSV:", error);
+      },
+  });
+
+  return questions;
+};
 
 /**
  * This function parses the honeypots from a csv. 
@@ -94,39 +94,40 @@ export const parseQuestions = async (sector) => {
  * @returns {Honeypot[]} - A list of honeypots. 
  */
 export const parseHoneypots = async (sector) => {
-  const csvFilePath = `./data/honeypots/${sector}.csv`;
-  const csvContent = await fs.readFile(csvFilePath, 'utf-8');
+  const csvFilePath = `./honeypots/${sector}.csv`;
+  const response = await fetch(csvFilePath);
+  const csvContent = await response.text();
 
-  return new Promise((resolve, reject) => {
-    Papa.parse(csvContent, {
+  const honeypots = []; // Stores all the honeypots that are parsed
+  let currentHoneypot = null; // Stores the current honeypot that is being parsed
+
+  Papa.parse(csvContent, {
       header: true,
       skipEmptyLines: true,
       complete: (result) => {
-        const data = result.data;
-      
-        const honeypots = []; // Stores all the honeypots that are parsed
-        let currentHoneypot = null; // Stores the current honeypot that is being parsed
+          const data = result.data;
 
-        data.forEach((row) => {
-          // New Honeypot Object created
-          currentHoneypot = new Honeypot({
-            tags: parseTags(row.Tags),
-            objective: row.Objective,
-            location: row.Location,
-            description: row.Description,
-            mitreTactic: row.Mitre,
-            initialScore: parseInt(row.InitialScore, 10),
-            currentScore: parseInt(row.InitialScore, 10),
+          data.forEach((row) => {
+              // Create a new Honeypot object for each row
+              currentHoneypot = new Honeypot({
+                  tags: parseTags(row.Tags),
+                  objective: row.Objective,
+                  location: row.Location,
+                  description: row.Description,
+                  mitreTactic: row.Mitre,
+                  initialScore: parseInt(row.InitialScore, 10),
+                  currentScore: parseInt(row.InitialScore, 10),
+              });
+
+              if (currentHoneypot) {
+                  honeypots.push(currentHoneypot);
+              }
           });
-
-          if (currentHoneypot) {
-            honeypots.push(currentHoneypot);
-          }
-
-        });
-        resolve(honeypots);
       },
-      error: (error) => reject(error),
-    });
+      error: (error) => {
+          console.error("Error parsing CSV:", error);
+      },
   });
+
+  return honeypots;
 };

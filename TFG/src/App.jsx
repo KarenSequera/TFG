@@ -16,9 +16,15 @@ function App() {
    * 
    * @property {string} sector - Stores the selected sector or subsector. 
    *   - values: 'healthcare', 'energy', 'financial', 'transport', 'air', 'road', 'maritime', 'railway'.
+   * @property {Question[]} questions - Stores the questionnaire questions.
+   * @property {Honeypot[]} honeypots - Stores the honeypots
+   * @property {bool} loading - To rerender once the data is fetched.
    */
   const [stage, setStage] = useState('intro'); // The initial Stage is always 'intro'.
   const [sector, setSector] = useState(null);
+  const [questions, setQuestions] = useState([]); // Stores parsed questions.
+  const [honeypots, setHoneypots] = useState([]); // Stores parsed honeypots.
+  const [loading, setLoading] = useState(false); 
 
   /**
    *************HANDLERS******************
@@ -34,18 +40,38 @@ function App() {
    * Handles the selection of a sector or subsector.
    * @param {string} selectedSector 
    */
-  const handleSectorSelected = (selectedSector) => {
-    // If the selected sector is transport, the stage is set to  'transportSelection'
-    if(selectedSector === 'transport'){
-      setStage('transportSelection')
-    }
-    // Any other value sets the stage to 'questionnaire' and sets the sector state variable accordingly.
-    else{
-      setSector(selectedSector);
-      setStage('questionnaire');
+  const handleSectorSelected = async (selectedSector) => {
+    setLoading(true); 
+
+    //TODO: Erase this line once all sectors have been implemented 
+    selectedSector = 'energy';
+    setSector(selectedSector); // Set the selected sector
+
+    try {
+        // Fetch data
+        const parsedQuestions = await parseQuestions(selectedSector);
+        const parsedHoneypots = await parseHoneypots(selectedSector);
+
+        // Set the state
+        setQuestions(parsedQuestions);
+        setHoneypots(parsedHoneypots);
+
+        console.log('Parsed Questions:', parsedQuestions);
+        console.log('Parsed Honeypots:', parsedHoneypots);
+
+        // Move to the questionnaire stage
+        setStage('questionnaire');
+
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    } finally {
+        setLoading(false);
     }
   };
 
+  const handleQuestionnaireComplete = () =>{
+    setStage('recommendations');
+  }
 
   return (
     <div
@@ -64,7 +90,7 @@ function App() {
     {
       /**
        *************STAGES MANAGEMENT ******************
-      //  */
+      */
     }
 
     {stage === 'intro' && (
@@ -98,7 +124,17 @@ function App() {
 
     {stage === 'questionnaire' && (
       <div>
-        <Questionnaire sector={sector}/>
+        <Questionnaire
+            questions={questions}
+            honeypots={honeypots}
+            onComplete={handleQuestionnaireComplete}
+          />
+      </div>   
+    )}
+
+    {stage === 'recommendations' && (
+      <div>
+        <h1>RECOMMENDATIONS STAGE</h1>
       </div>   
     )}
 
