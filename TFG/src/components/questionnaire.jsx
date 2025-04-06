@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useState} from 'react';
+import { parseHoneypots, parseQuestions } from '../utils/dataParser';
 
 const Questionnaire = ( { sector }) => {
 
