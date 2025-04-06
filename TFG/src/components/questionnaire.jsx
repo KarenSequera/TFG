@@ -9,7 +9,7 @@ class Questionnaire extends Component {
         this.state = {
             currentQuestion: 0, // Tracks the current question index
             isFinished: false, // Tracks if the questionnaire is finished
-            currentAnswer: 0, // Tracks the current selected answer for a question
+            currentAnswer: null, // Tracks the current selected answer for a question
             
         };
         this.questions = props.questions;
@@ -20,10 +20,38 @@ class Questionnaire extends Component {
         this.setState({ currentAnswer: index }); // Update the selected answer
     };
 
+    handleAnswerSubmit = () => {
+        // Code to execute current answer actions
+        // answer = this.questions[].answer[]
+        //addpoints(answer.tags, answer.points);
+        //substractpoints(answer.tags, answer.points);
+        //activate questions(answer.tags);
+
+       // To make sure the questionnaire is not finished.
+       // Not all the questions are active, so we need to find the next active question
+        let nextQuestion = this.state.currentQuestion + 1;
+        while( nextQuestion < this.questions.length && !this.questions[nextQuestion].active){
+            nextQuestion++;
+        }
+        
+        if( nextQuestion >= this.questions.length){
+            console.log('Questionnaire completed');
+            this.setState({isFinished : true})
+            this.props.onComplete();
+        }
+        else{
+            this.setState({
+                currentQuestion: nextQuestion,
+                currentAnswer: null,
+            })
+        }
+        
+
+    };
+
     render() {
 
         return(
-            
             <div>
             <h1>Questionnaire phase</h1>
             <p>{this.questions[this.state.currentQuestion].text}</p>
@@ -44,6 +72,12 @@ class Questionnaire extends Component {
                 </li>
             ))}
             </ul>
+            <button
+                onClick={this.handleAnswerSubmit}
+                disabled={this.state.currentAnswer === null} // Disable the button if no answer is selected
+            >
+                Next
+            </button>
         </div>
         )
     }
