@@ -10,6 +10,7 @@ class Questionnaire extends Component {
             currentQuestion: 0, // Tracks the current question index
             isFinished: false, // Tracks if the questionnaire is finished
             currentAnswer: null, // Tracks the current selected answer for a question
+            showRecomendations: false // Tracks if the questionnaire needs to show recommendations
             
         };
         this.questions = props.questions;
@@ -60,8 +61,7 @@ class Questionnaire extends Component {
         
         if( nextQuestion >= this.questions.length){
             console.log('Questionnaire completed');
-            this.setState({isFinished : true})
-            this.props.onComplete();
+            this.setState({showRecomendations : true})
         }
         else{
             this.setState({
@@ -72,6 +72,11 @@ class Questionnaire extends Component {
         
 
     };
+
+    handleFinish = () => {
+        this.setState({isFinished: true});
+        this.props.onComplete();
+    }
 
     //  * Given an array of tags, this function returns the array indexes of the honeypot that contain all the tags in the array. 
     //  * @param {string[]} - tags to match
@@ -137,36 +142,57 @@ class Questionnaire extends Component {
     }
 
     render() {
-
-        return(
+        const topHoneypots = [...this.honeypots].sort((a, b) => b.points - a.points).slice(0, 3);
+        return (
             <div>
-            <h1>Questionnaire phase</h1>
-            <p>{this.questions[this.state.currentQuestion].text}</p>
-            {/* This style gets rid of the bullet points */}
-            <ul style={{ listStyleType: 'none', padding: 0 }}>
-            {this.questions[this.state.currentQuestion].answers.map((answer, index) => (
-                <li key={index}>
-                    <label>
-                        <input
-                            type="radio"
-                            name="answer"
-                            value={index} 
-                            checked={ this.state.currentAnswer === index} 
-                            onChange={() => this.handleAnswerChange(index)}
-                        />
-                        {answer.text}
-                    </label>
-                </li>
-            ))}
-            </ul>
-            <button
-                onClick={this.handleAnswerSubmit}
-                disabled={this.state.currentAnswer === null} // Disable the button if no answer is selected
-            >
-                Next
-            </button>
-        </div>
-        )
+                {!this.state.showRecomendations ? (
+                    <div>
+                        <h1>Questionnaire phase</h1>
+                        <p>{this.questions[this.state.currentQuestion].text}</p>
+                        {/* This style gets rid of the bullet points */}
+                        <ul style={{ listStyleType: 'none', padding: 0 }}>
+                            {this.questions[this.state.currentQuestion].answers.map((answer, index) => (
+                                <li key={index}>
+                                    <label>
+                                        <input
+                                            type="radio"
+                                            name="answer"
+                                            value={index}
+                                            checked={this.state.currentAnswer === index}
+                                            onChange={() => this.handleAnswerChange(index)}
+                                        />
+                                        {answer.text}
+                                    </label>
+                                </li>
+                            ))}
+                        </ul>
+                        <button
+                            onClick={this.handleAnswerSubmit}
+                            disabled={this.state.currentAnswer === null} // Disable the button if no answer is selected
+                        >
+                            Next
+                        </button>
+                    </div>
+                ) : (
+                    <div>
+                    <h2>Recommended Honeypots</h2>
+                    <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+                        {topHoneypots.map((honeypot, index) => (
+                            <div key={index} style={{ border: '1px solid #ccc', padding: '10px', width: '30%' }}>
+                                <p><strong>Objective:</strong> {honeypot.objective}</p>
+                                <p><strong>Location:</strong> {honeypot.location}</p>
+                                <p><strong>Description:</strong> {honeypot.description}</p>
+                                <p><strong>MITRE Tactic:</strong> {honeypot.mitreTactic}</p>
+                                <p><strong>Final Points</strong> {honeypot.currentScore}</p>
+
+                            </div>
+                        ))}
+                    </div>
+                    <button onClick={this.handleFinish}>Finish</button>
+                </div>
+                )}
+            </div>
+        );
     }
 
 }

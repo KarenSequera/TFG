@@ -12,7 +12,7 @@ function App() {
    *   - 'sectorSelection': Screen to select the sector.
    *   - 'transportSelection': Screen to select the transport subsector.
    *   - 'questionnaire': The questionnaire screen.
-   *   - 'recommendations': The recommendations screen.
+   *   - 'reset': Button to take again the questionnarie
    * 
    * @property {string} sector - Stores the selected sector or subsector. 
    *   - values: 'healthcare', 'energy', 'financial', 'transport', 'air', 'road', 'maritime', 'railway'.
@@ -70,7 +70,7 @@ function App() {
   };
 
   const handleQuestionnaireComplete = () =>{
-    setStage('recommendations');
+    setStage('reset');
   }
 
   return (
@@ -132,9 +132,9 @@ function App() {
       </div>   
     )}
 
-    {stage === 'recommendations' && (
+    {stage === 'reset' && (
       <div>
-        <h1>RECOMMENDATIONS STAGE</h1>
+        <h1>Reset Button</h1>
       </div>   
     )}
 
