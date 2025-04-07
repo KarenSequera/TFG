@@ -16,14 +16,14 @@ class Answer {
     text = '',
     tagsAdd = [],
     pointsToAdd = 0,
-    tagsSubtract = [],
+    tagsSubstract = [],
     pointsToSubstract = 0,
     tagsQuestion = [],
   }) {
     this.text = text;
     this.tagsAdd = tagsAdd;
     this.pointsToAdd = pointsToAdd;
-    this.tagsSubtract = tagsSubtract;
+    this.tagsSubstract = tagsSubstract;
     this.pointsToSubstract = pointsToSubstract;
     this.tagsQuestion = tagsQuestion;
   }
@@ -36,7 +36,7 @@ class Answer {
         text: this.text,
         tagsAdd: this.tagsAdd,
         pointsToAdd: this.pointsToAdd,
-        tagsSubtract: this.tagsSubtract,
+        tagsSubstract: this.tagsSubstract,
         pointsToSubstract: this.pointsToSubstract,
         tagsQuestion: this.tagsQuestion,
       };

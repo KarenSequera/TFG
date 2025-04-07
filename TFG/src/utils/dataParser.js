@@ -14,9 +14,9 @@ const parseTags = (tags) => {
       // Separate each of the TAGS groups via REGEX (delimited by [] in the string)
       const matches = tags.match(/\[.*?\]/g);
   
-      // For each of the matches, we replace the [] and split the tags by commas
+      // For each of the matches, we replace the [] and split the tags by commas, trim and lowercase the tags
       return matches.map((group) =>
-        group.replace(/[\[\]]/g, '').split(',') 
+        group.replace(/[\[\]]/g, '').split(',').map( tag => tag.trim().toLowerCase()) 
       );
 
     } catch (error) {
@@ -67,7 +67,7 @@ export const parseQuestions = async (sector) => {
                       text: row.Answer,
                       tagsAdd: row.AddPointsHoneypotTags ? parseTags(row.AddPointsHoneypotTags) : [],
                       pointsToAdd: row.PointsToAdd ? parseInt(row.PointsToAdd, 10) : 0,
-                      tagsSubtract: row.SubstractPointsHoneypotTags ? parseTags(row.SubstractPointsHoneypotTags) : [],
+                      tagsSubstract: row.SubstractPointsHoneypotTags ? parseTags(row.SubstractPointsHoneypotTags) : [],
                       pointsToSubstract: row.PointsToSubstract ? parseInt(row.PointsToSubstract, 10) : 0,
                       tagsQuestion: row.EnableQuestionTags ? parseTags(row.EnableQuestionTags) : [],
                   });

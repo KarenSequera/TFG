@@ -21,11 +21,35 @@ class Questionnaire extends Component {
     };
 
     handleAnswerSubmit = () => {
-        // Code to execute current answer actions
-        // answer = this.questions[].answer[]
-        //addpoints(answer.tags, answer.points);
-        //substractpoints(answer.tags, answer.points);
-        //activate questions(answer.tags);
+        const { currentQuestion, currentAnswer } = this.state;
+        let answer = this.questions[currentQuestion].answers[currentAnswer];
+        
+        // Add points to Honeypots
+        if (answer.tagsAdd) {
+            answer.tagsAdd.forEach(tags => {
+                let indexes = this.getHoneypotMatchingTags(tags);
+                this.addPointsToHoneypots(indexes, answer.pointsToAdd);
+            });
+        }
+
+        // Substract points to Honeypots
+        if (answer.tagsSubstract) {
+            answer.tagsSubstract.forEach(tags => {
+                let indexes = this.getHoneypotMatchingTags(tags);
+                this.substractPointsToHoneypots(indexes, answer.pointsToSubstract);
+            });
+        }
+        
+        // Activate other questions
+        if (answer.tagsQuestion) {
+            answer.tagsQuestion.forEach(tags => {
+                let indexes = this.getQuestionsMatchingTags(tags);
+                console.log(indexes)
+                indexes.forEach(index => {
+                    this.questions[index].activateQuestion();
+                });
+            });
+        }
 
        // To make sure the questionnaire is not finished.
        // Not all the questions are active, so we need to find the next active question
@@ -48,6 +72,69 @@ class Questionnaire extends Component {
         
 
     };
+
+    //  * Given an array of tags, this function returns the array indexes of the honeypot that contain all the tags in the array. 
+    //  * @param {string[]} - tags to match
+    //  * @returns {int[]} - array of integer containing the indexes
+    getHoneypotMatchingTags = (tags) => {
+        const matchingIndexes = []; // Variable to store the indexes
+        //Iterate through the honeypots looking for those that match the tags
+        this.honeypots.forEach((honeypot, index) => {
+            let match = true;
+            let honeypotTags = honeypot.tags.flat(); // If flat is not used, include does not work
+            tags.forEach(tag => {
+                if (!honeypotTags.includes(tag)) {
+                    // If  a honeypot does not match the tag it is not pushed
+                    match = false; 
+                }
+            });
+            if(match){ matchingIndexes.push(index)}
+        });
+        return matchingIndexes;
+    };
+
+    //  * Given an array of tags, this function returns the array indexes of the questions that contain all the tags in the array. 
+    //  * @param {string[]} - tags to match
+    //  * @returns {int[]} - array of integer containing the indexes
+    getQuestionsMatchingTags = (tags) => {
+        const matchingIndexes = []; // Variable to store the indexes
+        //Iterate through the honeypots looking for those that match the tags
+        this.questions.forEach((question, index) => {
+            let match = true;
+            console.log(tags)
+            let questionTags = question.tags.flat(); // If flat is not used, include does not work
+            console.log(questionTags)
+            tags.forEach(tag => {
+                if (!questionTags.includes(tag)) {
+                    // If  a honeypot does not match the tag it is not pushed
+                    match = false; 
+                    console.log("Enters in if, not match")
+                }
+            });
+            if(match){ matchingIndexes.push(index)}
+        });
+        return matchingIndexes;
+    };
+
+    //  * Adds points to the honeypots in the index positions specified
+    //  * @param {int[]} indexes - Positions of the honeypots to add points
+    //  * @param {int} pointsToAdd - Points to add
+    addPointsToHoneypots = (indexes, pointsToAdd) => {
+        indexes.forEach(index => {
+            this.honeypots[index].addPoints(pointsToAdd);
+            //console.log(pointsToAdd, 'Points added to', this.honeypots[index].tags)
+        });
+    }
+
+    //  * Substracts points to the honeypots in the index positions specified
+    //  * @param {int[]} indexes - Positions of the honeypots to substract points
+    //  * @param {int} pointsToSubstract - Points to substract
+    substractPointsToHoneypots = (indexes, pointsToSubstract) => {
+        indexes.forEach(index =>{
+            this.honeypots[index].substractPoints(pointsToSubstract);
+            //console.log(pointsToSubstract, 'Points substracted to', this.honeypots[index].tags)
+        });
+    }
 
     render() {
 
