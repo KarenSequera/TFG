@@ -111,6 +111,7 @@ export const parseHoneypots = async (sector) => {
               // Create a new Honeypot object for each row
               currentHoneypot = new Honeypot({
                   tags: parseTags(row.Tags),
+                  type: row.Type,
                   objective: row.Objective,
                   location: row.Location,
                   description: row.Description,

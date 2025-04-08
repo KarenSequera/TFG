@@ -73,6 +73,15 @@ function App() {
     setStage('reset');
   }
 
+  const handleReset = () =>{
+    setStage('intro'); 
+    setSector(null); 
+    setQuestions([]); 
+    setHoneypots([]); 
+    setLoading(false); 
+  };
+
+
   return (
     <div
       style={{
@@ -135,6 +144,7 @@ function App() {
     {stage === 'reset' && (
       <div>
         <h1>Reset Button</h1>
+        <button onClick={() => handleReset()}>Reser Questionnaire</button>
       </div>   
     )}
 

@@ -142,7 +142,8 @@ class Questionnaire extends Component {
     }
 
     render() {
-        const topHoneypots = [...this.honeypots].sort((a, b) => b.points - a.points).slice(0, 3);
+        //TODO: If the recommendations are too similar, check that at least, X tags different 
+        const topHoneypots = [...this.honeypots].sort((a, b) => b.currentScore - a.currentScore).slice(0, 3);
         return (
             <div>
                 {!this.state.showRecomendations ? (
@@ -180,11 +181,11 @@ class Questionnaire extends Component {
                         {topHoneypots.map((honeypot, index) => (
                             <div key={index} style={{ border: '1px solid #ccc', padding: '10px', width: '30%' }}>
                                 <p><strong>Objective:</strong> {honeypot.objective}</p>
+                                <p><strong>Type:</strong> {honeypot.type}</p>
                                 <p><strong>Location:</strong> {honeypot.location}</p>
                                 <p><strong>Description:</strong> {honeypot.description}</p>
                                 <p><strong>MITRE Tactic:</strong> {honeypot.mitreTactic}</p>
                                 <p><strong>Final Points</strong> {honeypot.currentScore}</p>
-
                             </div>
                         ))}
                     </div>

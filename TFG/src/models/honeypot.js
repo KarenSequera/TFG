@@ -14,6 +14,7 @@ class Honeypot {
    */
     constructor({
       tags = [],
+      type = '',
       objective = '',
       location = '',
       description = '',
@@ -22,6 +23,7 @@ class Honeypot {
       currentScore = 0
     }) {
       this.tags = tags; 
+      this.type = type;
       this.objective = objective;
       this.location = location; 
       this.description = description; 
@@ -36,6 +38,7 @@ class Honeypot {
     getHoneypot() {
       return {
         tags: this.tags,
+        type: this.type,
         objective: this.objective,
         location: this.location,
         description: this.description,
