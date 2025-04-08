@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { parseHoneypots, parseQuestions } from './utils/dataParser';
 import Questionnaire from './components/questionnaire';
+import './styles/App.css';
+
 /**
  * The main application component for the HoneyForm questionnaire.
  */
@@ -85,7 +87,6 @@ function App() {
   return (
     <div
       style={{
-        maxWidth: "800px",
         display: "flex",
         flexDirection: "column",
         gap: "2rem",
@@ -103,11 +104,20 @@ function App() {
     }
 
     {stage === 'intro' && (
-      <div>
-        <h1>Welcome to HoneyForm </h1>
-        <div>
-          <button onClick={handleIntro}>Start Self-Assessment</button>
-        </div>
+      <div className="intro-stage">
+          <div className="intro-content">
+            <h1>HoneyForm</h1>
+            <p>Welcome to HoneyForm!</p>
+            
+            <p>Honeyform is a questionnaire designed for critical infraestructure organization looking to deply effective Honeypots!</p>
+
+            <p>Want to know what type of honeypot best suits your need and where to deply it?</p>
+            <div>
+                <button className="intro-button" onClick={handleIntro}>
+                  Start Self-Assessment
+                </button>
+            </div>
+          </div>
       </div>
     )}
 

@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;700&display=swap');
+
+/* General styles for the intro stage */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.intro-stage {
+    background-color: #2c5a77; /* Blue background */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family:'Montserrat';
+    font-weight: 200;
+
+}
+
+/* Styles for the white square */
+.intro-content {
+    width: 75%;
+    height: 75%;
+    background-color: white;
+    padding: 2rem;
+    border-radius: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: left;
+}
+
+.intro-content h1 {
+    font-size: 5rem; /* Adjust the size of the heading */
+    font-weight: 400; /* Set the desired font weight */
+    color: #2c5a77; /* Change the color */
+    margin-bottom: 1rem; /* Add spacing below the heading */
+}
+
+.intro-content p {
+    font-size: 1.5rem; /* Adjust the size of the paragraph */
+    font-weight: 400; /* Set the desired font weight */
+    color: #555; /* Change the color */
+    line-height: 1.6; /* Adjust line spacing */
+    margin: 0; /* Remove default margin */
+}
+
+/* Button styles */
+.intro-button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    background-color: #2c5a77;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.intro-button:hover {
+    background-color: #63acd8; /* Darker blue on hover */
+}
