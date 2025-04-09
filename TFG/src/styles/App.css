@@ -6,6 +6,8 @@ html, body {
     margin: 0;
 }
 
+/*INTRO STAGE*/
+
 .intro-stage {
     background-image: url('fotos/background.png'); 
     background-size: cover; 
@@ -20,11 +22,10 @@ html, body {
 }
 
 .intro-logo {
-    width: 50%; /* Adjust the width of the logo */
-    height: auto; /* Maintain the aspect ratio */
+    width: 50%; 
+    height: auto;
 } 
 
-/* Styles for the white square */
 .intro-content {
     width: 75%;
     height: 75%;
@@ -32,12 +33,35 @@ html, body {
     padding: 2rem;
     border-radius: 30px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    text-align: center; /* Center text inside the container */
-    display: flex; /* Use flexbox for alignment */
-    flex-direction: column; /* Stack children vertically */
-    align-items: center; /* Center children horizontally */
-    justify-content: center; /* Center children vertically */    
+    text-align: center; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center;     
+}
+
+.sector-content {
+    width: 75%;
+    height: 75%;
+    background-color: white;
+    padding: 2rem;
+    border-radius: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: top; 
+    display: flex; 
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center;    
+}
+
+.sector-content p {
+    size: contain;
+    text-align: center; 
+    font-size: 1.5rem; 
+    color: #555; 
+    line-height: 1.8; 
+    margin: 0 0 1rem 0;
+    max-width: 600px;
 }
 
 .intro-content p {
@@ -58,24 +82,128 @@ html, body {
 
 }
 
-
 /* Button styles */
 .intro-button {
     size: contain;
-    padding: 1rem 2rem; /* Increase padding for a larger button */
-    font-size: 1.25rem; /* Make the font size bigger */
-    font-family: 'Montserrat', sans-serif; /* Use the same font as the rest */
-    font-weight: 700; /* Match the font weight */
-    background-color: #2c5a77; /* Keep the blue background */
-    color: white; /* White text */
-    border: none; /* Remove border */
-    border-radius: 10px; /* Make the corners less round */
-    cursor: pointer; /* Pointer cursor on hover */
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Add smooth transitions */
+    padding: 1rem 2rem; 
+    font-size: 1.25rem; 
+    font-family: 'Montserrat', sans-serif; 
+    font-weight: 700;
+    background-color: #2c5a77;
+    color: white; 
+    border: none; 
+    border-radius: 10px; 
+    cursor: pointer; 
+    transition: background-color 0.3s ease, transform 0.2s ease; 
+}
+.intro-button:hover {
+    size: contain;
+    background-color: #B2CEE3; 
+    transform: scale(1.05); 
+}
+
+/*SECTOR SELECTION STAGE*/
+
+.sector-selection{
+    background-image: url('fotos/background.png'); 
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family:'Montserrat';
 }
 
 
-.intro-button:hover {
+.sector-selection-content {
+    width: 75%;
+    height: 75%;
+    background-color: white;
+    padding: 2rem;
+    border-radius: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: flex-start;
+    gap: 1rem;
+    position: relative;
+}
+
+.sector-selection-content p {
     size: contain;
-    background-color: #B2CEE3; /* Darker blue on hover */
+    text-align: center; 
+    font-size: 1.5rem; 
+    color: #555; 
+    line-height: 1.8; 
+    margin: 0 0 1rem 0;
+    max-width: 600px;
+}
+
+.sector-selection-content h1 {
+    size: contain;
+    text-align: center;
+    font-size: 4rem;
+    margin-bottom: 3%;
+    margin-top: 3%;
+    color: #204054; 
+}
+
+.button-sector {
+    size: contain;
+    padding: 1rem 2rem;
+    width: 100%; 
+    max-width: 300px; 
+    background-color: #2c5a77; 
+    border: none; 
+    border-radius: 10px; 
+
+    text-align: center; 
+    font-size: 1.25rem; 
+    font-family: 'Montserrat', sans-serif; 
+    font-weight: 700;
+    color: white; 
+
+    cursor: pointer; 
+    transition: background-color 0.3s ease, transform 0.2s ease;  
+}
+
+.button-sector:hover {
+    size: contain;
+    background-color: #B2CEE3; 
+    transform: scale(1.05);
+}
+
+.back-button {
+    size: contain;
+    position: absolute;
+    bottom: 3%; 
+    left: 3%;
+    width: 100%;
+    max-width: 150px;
+    height: 100%;
+    max-height: 40px;
+    background-color: #2c5a77;
+    border: none; 
+    border-radius: 10px; 
+
+    font-size: 1.25rem; 
+    text-align: center; 
+    font-family: 'Montserrat', sans-serif; 
+    font-weight: 700; 
+    color: white; 
+   
+    cursor: pointer; 
+    transition: background-color 0.3s ease, transform 0.2s ease; 
+    
+}
+
+.back-button:hover {
+    size: contain;
+    background-color: #B2CEE3; 
+    transform: scale(1.05); 
 }

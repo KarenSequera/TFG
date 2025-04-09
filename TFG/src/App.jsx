@@ -45,7 +45,12 @@ function App() {
   const handleSectorSelected = async (selectedSector) => {
     setLoading(true); 
 
-    //TODO: Erase this line once all sectors have been implemented 
+    
+    if (selectedSector === 'transport') {
+      return setStage('transportSelection');
+    }
+
+    //TODO: Erase this line once all sectors have been implemented
     selectedSector = 'energy';
     setSector(selectedSector); // Set the selected sector
 
@@ -127,26 +132,32 @@ function App() {
     )}
 
     {stage === 'sectorSelection' && (
-      <div className='intro-stage'>
-        <div className='intro-content'> 
-        <h1>Sector Selection</h1>
-        <button onClick={() => handleSectorSelected('healthcare')}>Healthcare</button>
-        <button onClick={() => handleSectorSelected('energy')}>Energy</button>
-        <button onClick={() => handleSectorSelected('financial')}>Financial Services</button>
-        <button onClick={() => handleSectorSelected('transport')}>Transport</button>
-      </div>
-
+      <div className='sector-selection'>
+        <div className='sector-selection-content'> 
+          <h1>Sector Selection</h1>
+          <p>Please select the sector your organization belongs to: </p>
+          <button className="button-sector" onClick={() => handleSectorSelected('healthcare')}>Healthcare</button>
+          <button className="button-sector" onClick={() => handleSectorSelected('energy')}>Energy</button>
+          <button className="button-sector" onClick={() => handleSectorSelected('financial')}>Financial Services</button>
+          <button className="button-sector" onClick={() => handleSectorSelected('transport')}>Transport</button>
+          <button className="back-button " onClick={() => handleReset()}>Back</button>
+        </div>
+        
       </div>
       
     )}
 
     {stage === 'transportSelection' && (
-      <div>
-        <h1>Sector Selection</h1>
-        <button onClick={() => handleSectorSelected('air')}>Air</button>
-        <button onClick={() => handleSectorSelected('road')}>Road</button>
-        <button onClick={() => handleSectorSelected('railway')}>Railway</button>
-        <button onClick={() => handleSectorSelected('maritime')}>Maritime</button>
+      <div className="sector-selection">
+        <div className="sector-selection-content">
+          <h1>Transport Selection</h1>
+          <p>Please select the transport subsector your organization belongs to:</p>
+          <button className="button-sector" onClick={() => handleSectorSelected('air')}>Air</button>
+          <button className="button-sector" onClick={() => handleSectorSelected('road')}>Road</button>
+          <button className="button-sector" onClick={() => handleSectorSelected('railway')}>Railway</button>
+          <button className="button-sector" onClick={() => handleSectorSelected('maritime')}>Maritime</button>
+          <button className="back-button" onClick={() => setStage('sectorSelection')}>Back</button>
+        </div>
       </div>
     )}
 
@@ -163,7 +174,7 @@ function App() {
     {stage === 'reset' && (
       <div>
         <h1>Reset Button</h1>
-        <button onClick={() => handleReset()}>Reser Questionnaire</button>
+        <button onClick={() => handleReset()}>Reset Questionnaire</button>
       </div>   
     )}
 
