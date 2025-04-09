@@ -106,12 +106,17 @@ function App() {
     {stage === 'intro' && (
       <div className="intro-stage">
           <div className="intro-content">
-            <h1>HoneyForm</h1>
-            <p>Welcome to HoneyForm!</p>
-            
-            <p>Honeyform is a questionnaire designed for critical infraestructure organization looking to deply effective Honeypots!</p>
+            <img 
+              src="/fotos/logo.png" 
+              alt="HoneyForm Logo" 
+              className="intro-logo" 
+            />
+            <span>
+              <p>Welcome to HoneyForm!</p>
+              <p>HoneyForm is a questionnaire designed for critical infrastructure organizations looking to deploy effective Honeypots!</p>
 
-            <p>Want to know what type of honeypot best suits your need and where to deply it?</p>
+              <p className='last-child'>Do you want to know what type of honeypot best suits your needs and where to deploy it?</p>
+            </span>
             <div>
                 <button className="intro-button" onClick={handleIntro}>
                   Start Self-Assessment
@@ -122,13 +127,17 @@ function App() {
     )}
 
     {stage === 'sectorSelection' && (
-      <div>
+      <div className='intro-stage'>
+        <div className='intro-content'> 
         <h1>Sector Selection</h1>
         <button onClick={() => handleSectorSelected('healthcare')}>Healthcare</button>
         <button onClick={() => handleSectorSelected('energy')}>Energy</button>
         <button onClick={() => handleSectorSelected('financial')}>Financial Services</button>
         <button onClick={() => handleSectorSelected('transport')}>Transport</button>
       </div>
+
+      </div>
+      
     )}
 
     {stage === 'transportSelection' && (
