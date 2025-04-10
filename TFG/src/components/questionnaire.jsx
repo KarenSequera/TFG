@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { parseHoneypots, parseQuestions } from '../utils/dataParser';
+import '../styles/Questionnaire.css';
 
 class Questionnaire extends Component {
 
@@ -10,8 +10,8 @@ class Questionnaire extends Component {
             currentQuestion: 0, // Tracks the current question index
             isFinished: false, // Tracks if the questionnaire is finished
             currentAnswer: null, // Tracks the current selected answer for a question
-            showRecomendations: false // Tracks if the questionnaire needs to show recommendations
-            
+            showRecomendations: false, // Tracks if the questionnaire needs to show recommendations
+            questionCount: 0
         };
         this.questions = props.questions;
         this.honeypots = props.honeypots;
@@ -55,6 +55,7 @@ class Questionnaire extends Component {
        // To make sure the questionnaire is not finished.
        // Not all the questions are active, so we need to find the next active question
         let nextQuestion = this.state.currentQuestion + 1;
+        this.setState((prevState) => ({ questionCount: prevState.questionCount + 1 }));
         while( nextQuestion < this.questions.length && !this.questions[nextQuestion].active){
             nextQuestion++;
         }
@@ -145,33 +146,34 @@ class Questionnaire extends Component {
         //TODO: If the recommendations are too similar, check that at least, X tags different 
         const topHoneypots = [...this.honeypots].sort((a, b) => b.currentScore - a.currentScore).slice(0, 3);
         return (
-            <div>
+            <div className='background'>
                 {!this.state.showRecomendations ? (
-                    <div>
-                        <h1>Questionnaire phase</h1>
+                    <div className='white-square'>
+                        <h1>Question {this.state.questionCount+1}:</h1>
                         <p>{this.questions[this.state.currentQuestion].text}</p>
-                        {/* This style gets rid of the bullet points */}
-                        <ul style={{ listStyleType: 'none', padding: 0 }}>
+                        <ul className="answers-list">
                             {this.questions[this.state.currentQuestion].answers.map((answer, index) => (
-                                <li key={index}>
-                                    <label>
-                                        <input
-                                            type="radio"
-                                            name="answer"
-                                            value={index}
-                                            checked={this.state.currentAnswer === index}
-                                            onChange={() => this.handleAnswerChange(index)}
-                                        />
-                                        {answer.text}
-                                    </label>
+                                <li
+                                    key={index}
+                                    className={this.state.currentAnswer === index ? 'selected' : ''}
+                                    onClick={() => this.handleAnswerChange(index)}
+                                >
+                                    {answer.text}
                                 </li>
                             ))}
                         </ul>
                         <button
                             onClick={this.handleAnswerSubmit}
                             disabled={this.state.currentAnswer === null} // Disable the button if no answer is selected
+                            className='next-button'
                         >
                             Next
+                        </button>
+                        <button
+                            onClick={this.handleFinish}
+                            className='reset-button'
+                        >
+                            Reset
                         </button>
                     </div>
                 ) : (

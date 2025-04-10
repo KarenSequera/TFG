@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { parseHoneypots, parseQuestions } from './utils/dataParser';
-import Questionnaire from './components/questionnaire';
+import Questionnaire from './components/Questionnaire.jsx';
 import './styles/App.css';
 
 /**
