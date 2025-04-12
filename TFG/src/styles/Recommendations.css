@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;500;600;700&display=swap');
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow: auto;
+}
+
+/*Styles applied to all the elements*/
+* {
+    user-select: none;
+}
+
+/*Background image*/
+
+/*Background white square that contains all the elements in the questionnaire*/
+.recommendations-white-square {
+    background-color: white;
+    border-radius: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+    width: 75%;
+    max-width: 75%;
+    min-height: 75%; 
+    height: auto; 
+    padding: 2rem;
+
+    text-align: center; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: flex-start;
+
+    gap: 1rem; 
+
+    position: relative; 
+}
+
+.recommendations-white-square h1 {
+    position: relative; 
+    text-align: center; 
+    align-self: center; 
+
+    margin: 0; 
+    margin-top: 10px; 
+    padding-top: 0; 
+
+    font-size: 2.5rem;
+    color: #204054; 
+}
+
+
+/*Container for the recommendation*/
+.recommendation-details {
+    border: 1px solid #ccc;
+    padding: 20px;
+
+    width: 50%;
+    margin: 0 auto;
+
+    text-align: left;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #555;
+
+    position: relative;
+}
+
+/*BUTTONS*/
+/* Previous button (triangle pointing left) */
+.recommendation-previous-button {
+    background-color: transparent;
+    width: 0;
+    height: 0;
+    border-top: 25px solid transparent; 
+    border-bottom: 25px solid transparent; 
+    border-right: 35px solid #2c5a77; 
+    border-left: solid transparent;
+
+    position: absolute; 
+    left: -60px; 
+    top: 50%; 
+    transform: translateY(-50%);
+
+    cursor: pointer;
+
+    transition: transform 0.2s ease, border-color 0.3s ease;
+}
+
+.recommendation-previous-button:hover {
+    border-right-color: #B2CEE3; /* Lighter blue on hover */
+}
+
+.recommendation-previous-button:disabled {
+    border-right-color: #d3d3d3; /* Gray for disabled state */
+    cursor: not-allowed;
+}
+
+/* Next button (triangle pointing right) */
+
+.recommendation-next-button {
+    background-color: transparent;
+    width: 0;
+    height: 0;
+    border-top: 25px solid transparent; 
+    border-bottom: 25px solid transparent; 
+    border-left: 35px solid #2c5a77; 
+    border-right: solid transparent;
+
+    position: absolute; 
+    right: -60px; 
+    top: 50%; 
+    transform: translateY(-50%);
+
+    cursor: pointer;
+
+    transition: transform 0.2s ease, border-color 0.3s ease;
+}
+
+.recommendation-next-button:hover {
+    border-left-color: #B2CEE3; 
+}
+
+.recommendation-next-button:disabled {
+    border-left-color: #d3d3d3; /* Gray for disabled state */
+    cursor: not-allowed;
+}
+
+/*Finish button*/
+.finish-button {
+    background-color: #2c5a77;
+    border: none;
+    border-radius: 10px;
+
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    color: white;
+
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/*Finish button hover*/
+.finish-button:hover {
+    background-color: #B2CEE3;
+    transform: scale(1.05);
+}

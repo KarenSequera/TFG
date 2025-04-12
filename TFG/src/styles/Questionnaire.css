@@ -1,4 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;500;600;700&display=swap');
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow: auto;
+}
 
 /*Styles applied to all the elements*/
 * {
@@ -12,32 +17,40 @@
     background-position: center; 
     background-repeat: no-repeat; 
 
+    min-width: 100%;
     width: 100vw;
     height: 100vh;
+    min-height: 100%;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
     font-family:'Montserrat';
+    overflow: auto;
 }
 
 /*Background white square that contains all the elements in the questionnaire*/
 .white-square {
     background-color: white;
+    border-radius: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 
     width: 75%;
-    height: 75%;
+    max-width: 75%;
+    min-height: 75%; 
+    height: auto; 
+    padding: 2rem;
 
+    text-align: center; 
     display: flex; 
     flex-direction: column; 
     align-items: center; 
+    justify-content: flex-start;
+
+    gap: 1rem; 
+
     position: relative; 
-    text-align: center; 
-    
-    padding: 2rem;
-    border-radius: 30px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 /*Title with question number*/

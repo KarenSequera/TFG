@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../styles/Questionnaire.css';
+import '../styles/Recommendations.css'
 
 class Questionnaire extends Component {
 
@@ -11,7 +12,8 @@ class Questionnaire extends Component {
             isFinished: false, // Tracks if the questionnaire is finished
             currentAnswer: null, // Tracks the current selected answer for a question
             showRecomendations: false, // Tracks if the questionnaire needs to show recommendations
-            questionCount: 0
+            questionCount: 0, // Tracks the question number
+            recommendationIndex: 0 // Index variable for the recommendations screen
         };
         this.questions = props.questions;
         this.honeypots = props.honeypots;
@@ -78,6 +80,18 @@ class Questionnaire extends Component {
         this.setState({isFinished: true});
         this.props.onComplete();
     }
+
+    handleNextRecommendation = () => {
+        this.setState((prevState) => ({
+            recommendationIndex: Math.min(prevState.recommendationIndex + 1, 2),
+        }));
+    };
+    
+    handlePreviousRecommendation = () => {
+        this.setState((prevState) => ({
+            recommendationIndex: Math.max(prevState.recommendationIndex - 1, 0),
+        }));
+    };
 
     //  * Given an array of tags, this function returns the array indexes of the honeypot that contain all the tags in the array. 
     //  * @param {string[]} - tags to match
@@ -163,6 +177,7 @@ class Questionnaire extends Component {
     render() {
         //TODO: If the recommendations are too similar, check that at least, X tags different 
         const topHoneypots = [...this.honeypots].sort((a, b) => b.currentScore - a.currentScore).slice(0, 3);
+        const currentRecommendation = topHoneypots[this.state.recommendationIndex];
         return (
             <div className='background'>
                 {!this.state.showRecomendations ? (
@@ -195,22 +210,34 @@ class Questionnaire extends Component {
                         </button>
                     </div>
                 ) : (
-                    <div>
-                    <h2>Recommended Honeypots</h2>
-                    <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-                        {topHoneypots.map((honeypot, index) => (
-                            <div key={index} style={{ border: '1px solid #ccc', padding: '10px', width: '30%' }}>
-                                <p><strong>Objective:</strong> {honeypot.objective}</p>
-                                <p><strong>Type:</strong> {honeypot.type}</p>
-                                <p><strong>Location:</strong> {honeypot.location}</p>
-                                <p><strong>Description:</strong> {honeypot.description}</p>
-                                <p><strong>MITRE Tactic:</strong> {honeypot.mitreTactic}</p>
-                                <p><strong>Final Points</strong> {honeypot.currentScore}</p>
-                            </div>
-                        ))}
+                    <div className= 'recommendations-white-square'>
+                        <h1>Recommendations</h1>
+                        <div className='recommendation-details'>
+                            <h2>Honeypot {this.state.recommendationIndex+1}</h2>
+                            <p><strong>Objective:</strong> {currentRecommendation.objective}</p>
+                            <p><strong>Type:</strong> {currentRecommendation.type}</p>
+                            <p><strong>Location:</strong> {currentRecommendation.location}</p>
+                            <p><strong>Description:</strong> {currentRecommendation.description}</p>
+                            <p><strong>MITRE Tactic:</strong> {currentRecommendation.mitreTactic}</p>
+                            <p><strong>Final Points:</strong> {currentRecommendation.currentScore}</p>
+
+                            <button
+                                onClick={this.handlePreviousRecommendation}
+                                disabled={this.state.recommendationIndex === 0}
+                                className='recommendation-previous-button'
+                            >
+                            </button>
+
+                            <button
+                                onClick={this.handleNextRecommendation}
+                                disabled={this.state.recommendationIndex === 2}
+                                className='recommendation-next-button'
+                            >
+                            </button>
+
+                        </div>
+                        <button onClick={this.handleFinish} className='finish-button'>Finish</button>
                     </div>
-                    <button onClick={this.handleFinish}>Finish</button>
-                </div>
                 )}
             </div>
         );
