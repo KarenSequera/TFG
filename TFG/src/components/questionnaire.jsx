@@ -141,6 +141,24 @@ class Questionnaire extends Component {
             //console.log(pointsToSubstract, 'Points substracted to', this.honeypots[index].tags)
         });
     }
+    
+    //FOR TESTING PURPOSE, C CHEAT TO SKIP QUESTIONNAIRE
+    componentDidMount() {
+        // Add a keydown event listener to skip to recommendations
+        document.addEventListener('keydown', this.handleKeyPress);
+    }
+    
+    componentWillUnmount() {
+        // Clean up the event listener when the component unmounts
+        document.removeEventListener('keydown', this.handleKeyPress);
+    }
+    
+    handleKeyPress = (event) => {
+        if (event.key.toLowerCase() === 'c') {
+            console.log('Skipping to recommendations stage for testing purposes.');
+            this.setState({ showRecomendations: true });
+        }
+    };
 
     render() {
         //TODO: If the recommendations are too similar, check that at least, X tags different 

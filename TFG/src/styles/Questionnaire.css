@@ -1,123 +1,170 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;500;600;700&display=swap');
 
+/*Styles applied to all the elements*/
+* {
+    user-select: none;
+}
+
+/*Background image*/
 .background {
     background-image: url('fotos/background.png'); 
     background-size: cover; 
     background-position: center; 
     background-repeat: no-repeat; 
+
     width: 100vw;
     height: 100vh;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     font-family:'Montserrat';
 }
 
+/*Background white square that contains all the elements in the questionnaire*/
 .white-square {
+    background-color: white;
+
     width: 75%;
     height: 75%;
-    background-color: white;
-    padding: 2rem;
-    border-radius: 30px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    text-align: center; 
+
     display: flex; 
     flex-direction: column; 
     align-items: center; 
-    position: relative; /* Keep relative positioning */
+    position: relative; 
+    text-align: center; 
+    
+    padding: 2rem;
+    border-radius: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+/*Title with question number*/
 .white-square h1 {
     position: relative; 
     text-align: center; 
-    font-size: 3.5rem;
+    align-self: center; 
+
     margin: 0; 
     margin-top: 10px; 
     padding-top: 0; 
+
+    font-size: 3.5rem;
     color: #204054; 
-    align-self: center; 
 }
 
+/*Question text*/
 .white-square p {  
+    max-width: 85%;
+
     position: relative;
-    text-align: center; 
+    text-align: center;
+    
+    margin-top: 4%; 
+    
     font-size: 2rem;
     color: #555; 
     line-height: 1.8; 
-    max-width: 85%;
-    margin-top: 4%; 
 }
 
-/*Questions*/
+/*ANSWERS*/
+
+/*List of questions container*/
 .white-square ul {
-    list-style-type: none; 
+    max-width: 75%;
+
+    text-align: left;
+
     padding: 0;
     margin: 10px 0 0 0;
     margin-top: 5px;
-    text-align: left;
-    max-width: 75%;
 
+    list-style-type: none; 
 }
 
+/*Individual question item*/
 .white-square ul li {
+    position: relative; 
+
+    margin: 2rem 0; 
+    padding-left: 2rem; 
+
     font-size: 1.5rem; 
     color: #555; 
     line-height: 1.8; 
-    margin: 2rem 0; 
-    position: relative; 
-    padding-left: 2rem; 
+   
     cursor: pointer;
+
     appearance: none; 
+
     transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
+/*Checkbox located before que question text */
 .white-square ul li::before {
-    content: ''; 
-    width: 1rem;
-    height: 1rem;
     background-color: transparent; 
     border: 2px solid #204054; 
     border-radius: 10px; 
+
+    content: ''; 
+    width: 1rem;
+    height: 1rem;
+
     position: absolute;
     left: 0;
     top: 50%;
     transform: translateY(-50%);
+
     transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
+/*Selected checkbox*/
 .white-square ul li.selected::before {
     background-color: #204054; 
     border-color: #204054; 
 }
 
+/*Selected answer*/
 .white-square ul li.selected {
     color: #204054;
-    font-weight: 500;
-    transition: color 0.3s ease;
+
+    /*font-weight: 500;*/
+    transform: scale(1.05);
+
+    transition: color 0.3s, transform 0.2s ease;
 }
 
+/*Hover checkbox*/
 .white-square ul li:hover::before {
     background-color: #204054; 
-    border-color: #204054; 
+    border-color: #204054;
+
     transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
+/*Hover question*/
 .white-square ul li:hover {
-    color: #204054; 
+    color: #204054;
     transition: color 0.3s ease;
 }
 
+/*BUTTONS*/
+
+/*Next button style*/
 .next-button {
+    background-color: #2c5a77;
+    border: none; 
+    border-radius: 10px; 
+
+    width: 100%;
+    max-width: 150px;
+    height: 100%;
+    max-height: 40px;
+
     position: absolute;
     bottom: 3%; 
     right: 3%;
-    width: 100%;
-    max-width: 150px;
-    height: 100%;
-    max-height: 40px;
-    background-color: #2c5a77;
-    border: none; 
-    border-radius: 10px; 
 
     font-size: 1.25rem; 
     text-align: center; 
@@ -125,36 +172,46 @@
     font-weight: 700; 
     color: white; 
    
-    cursor: pointer; 
+    cursor: pointer;
+
     transition: background-color 0.3s ease, transform 0.2s ease; 
-    
 }
 
+/*Next button hover style*/
 .next-button:hover {
-    size: contain;
     background-color: #B2CEE3; 
+
+    size: contain;
+
     transform: scale(1.05); 
 }
 
+/*Next button disabled style*/
 .next-button:disabled {
-    background-color: #d3d3d3; 
-    color: #a9a9a9; 
-    cursor: not-allowed; 
+    background-color: #d3d3d3;
+
+    color: #a9a9a9;
+    opacity: 0.6;  
+
+    cursor: not-allowed;
+
     transform: none; 
-    opacity: 0.6; 
 }
 
+/*Reset button style*/
 .reset-button {
-    position: absolute;
-    bottom: 3%; 
-    left: 3%;
+    background-color: #2c5a77;
+    border: none; 
+    border-radius: 10px; 
+
     width: 100%;
     max-width: 150px;
     height: 100%;
     max-height: 40px;
-    background-color: #2c5a77;
-    border: none; 
-    border-radius: 10px; 
+
+    position: absolute;
+    bottom: 3%; 
+    left: 3%;
 
     font-size: 1.25rem; 
     text-align: center; 
@@ -162,13 +219,16 @@
     font-weight: 700; 
     color: white; 
    
-    cursor: pointer; 
+    cursor: pointer;
+
     transition: background-color 0.3s ease, transform 0.2s ease; 
-    
 }
 
+/*Reset button hover style*/
 .reset-button:hover {
+    background-color: #B2CEE3;
+
     size: contain;
-    background-color: #B2CEE3; 
+     
     transform: scale(1.05); 
 }
