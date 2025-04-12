@@ -34,7 +34,6 @@ function App() {
 
   /**
    * Handles the transition from 'intro' stage to 'sectorSelection'
-   * @returns 
    */
   const handleIntro = () => setStage('sectorSelection');
 
@@ -44,7 +43,6 @@ function App() {
    */
   const handleSectorSelected = async (selectedSector) => {
     setLoading(true); 
-
     
     if (selectedSector === 'transport') {
       return setStage('transportSelection');
@@ -68,17 +66,18 @@ function App() {
 
         // Move to the questionnaire stage
         setStage('questionnaire');
-
-    } catch (error) {
+    }
+    catch (error) {
         console.error('Error fetching data:', error);
-    } finally {
+    }
+    finally {
         setLoading(false);
     }
   };
 
   const handleQuestionnaireComplete = () =>{
     setStage('reset');
-  }
+  };
 
   const handleReset = () =>{
     setStage('intro'); 
@@ -88,7 +87,6 @@ function App() {
     setLoading(false); 
   };
 
-
   return (
     <div
       style={{
@@ -97,7 +95,7 @@ function App() {
         gap: "2rem",
         margin: "0 auto",
         alignItems:"center",
-        justifyContent: "center", // Center content vertically
+        justifyContent: "flex-start", // Center content vertically
         height: "100vh" // Full viewport height
       }}
     >
