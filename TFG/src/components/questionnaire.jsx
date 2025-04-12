@@ -218,24 +218,22 @@ class Questionnaire extends Component {
                             <p><strong>Type:</strong> {currentRecommendation.type}</p>
                             <p><strong>Location:</strong> {currentRecommendation.location}</p>
                             <p><strong>Description:</strong> {currentRecommendation.description}</p>
-                            <p><strong>MITRE Tactic:</strong> {currentRecommendation.mitreTactic}</p>
+                            <p><strong>MITRE ATT&CK Tactics:</strong> {currentRecommendation.mitreTactic}</p>
                             <p><strong>Final Points:</strong> {currentRecommendation.currentScore}</p>
-
-                            <button
+                        
+                        </div>
+                        <button
                                 onClick={this.handlePreviousRecommendation}
                                 disabled={this.state.recommendationIndex === 0}
                                 className='recommendation-previous-button'
                             >
-                            </button>
-
-                            <button
+                        </button>
+                        <button
                                 onClick={this.handleNextRecommendation}
                                 disabled={this.state.recommendationIndex === 2}
                                 className='recommendation-next-button'
                             >
-                            </button>
-
-                        </div>
+                        </button>
                         <button onClick={this.handleFinish} className='finish-button'>Finish</button>
                     </div>
                 )}
