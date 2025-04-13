@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { parseHoneypots, parseQuestions } from './utils/dataParser';
 import Questionnaire from './components/Questionnaire.jsx';
 import './styles/App.css';
+import './styles/Finish.css';
 
 /**
  * The main application component for the HoneyForm questionnaire.
@@ -170,9 +171,25 @@ function App() {
     )}
 
     {stage === 'reset' && (
-      <div>
-        <h1>Reset Button</h1>
-        <button onClick={() => handleReset()}>Reset Questionnaire</button>
+      <div className='finish-background'>
+        <div className='finish-white-square'>
+          <img 
+                src="/fotos/logo.png" 
+                alt="HoneyForm Logo" 
+                className="finish-logo" 
+              />
+          <h1>Thank you for taking the questionnaire!</h1>
+          <p> Your feedback means a lot! Please take a moment to answer a few short questions to help us improve.</p>
+          <div className='finish-button-container'>
+            <button 
+                onClick={() => window.open('https://forms.gle/cou5Qt99eEJffU4q8', '_blank')} 
+                className="finish-button"
+              >
+                Give Feedback
+            </button>
+            <button className="finish-button" onClick={() => handleReset()}>Reset Questionnaire</button>
+          </div>
+        </div>
       </div>   
     )}
 

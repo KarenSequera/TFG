@@ -35,6 +35,7 @@ html, body {
     position: relative; 
 }
 
+/*Recommendations title*/
 .recommendations-white-square h1 {
     position: relative; 
     text-align: center; 
@@ -69,6 +70,7 @@ html, body {
     box-sizing: border-box; 
 }
 
+/*Honeypot subtitle*/
 .recommendation-details h2{
     text-align: center;
     font-size: 1.8rem;
@@ -76,6 +78,7 @@ html, body {
     color: #2c5a77;
 }
 
+/*Bold letters in the recommendation*/
 .recommendation-details strong{
     color: #2c5a77;
     
@@ -83,7 +86,7 @@ html, body {
 
 
 /*BUTTONS*/
-/* Previous button (triangle pointing left) */
+/* Previous honeypot button */
 .recommendation-previous-button {
     background-color: transparent;
     width: 0;
@@ -101,17 +104,18 @@ html, body {
     cursor: pointer;
 }
 
+/*Previous honeypot button hover*/
 .recommendation-previous-button:hover {
-    border-right-color: #B2CEE3; /* Lighter blue on hover */
+    border-right-color: #B2CEE3;
 }
 
+/*Previous honeypot button disabled*/
 .recommendation-previous-button:disabled {
-    border-right-color: #d3d3d3; /* Gray for disabled state */
+    border-right-color: #d3d3d3;
     cursor: not-allowed;
 }
 
-/* Next button (triangle pointing right) */
-
+/* Next honeypot button*/
 .recommendation-next-button {
     background-color: transparent;
     width: 0;
@@ -129,12 +133,14 @@ html, body {
     cursor: pointer;
 }
 
+/* Next honeypot button hover*/
 .recommendation-next-button:hover {
     border-left-color: #B2CEE3; 
 }
 
+/* Next honeypot button disabled*/
 .recommendation-next-button:disabled {
-    border-left-color: #d3d3d3; /* Gray for disabled state */
+    border-left-color: #d3d3d3; 
     cursor: not-allowed;
 }
 

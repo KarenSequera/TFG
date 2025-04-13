@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600;700&display=swap');
+
+/* General styles for the intro stage */
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow: auto;
+}
+
+* {
+    user-select: none;
+}
+
+/*INTRO STAGE*/
+
+/*Background image*/
+.finish-background{
+    background-image: url('fotos/background.png'); 
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat;
+
+    width: 100%;
+    min-height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: 'Montserrat';
+    overflow: auto;
+}
+
+/*White square that contains all the content*/
+.finish-white-square {
+    background-color: white;
+    border-radius: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+    width: 75%;
+    max-width: 75%;
+    min-height: 75%; 
+    height: auto; 
+    padding: 2rem;
+
+    text-align: center; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: flex-start;
+
+    gap: 1rem; 
+}
+
+.finish-logo {
+    width: 50%; 
+    height: auto;
+
+    margin-top: -2%;
+    margin-bottom: -2%;
+} 
+
+.finish-white-square h1 {
+    size: contain;
+    text-align: center;
+    margin-bottom: 3%;
+    margin-top: 2%;
+
+    font-size: 3.5rem;
+    
+    color: #204054; 
+}
+
+.finish-white-square p{
+    max-width: 600px;
+
+    margin-top: 1.0%;
+    size: contain;
+    text-align: center;
+
+    font-size: 1.5rem; 
+    color: #555; 
+    line-height: 1.8;   
+}
+
+.finish-button-container {
+    display: flex; 
+    flex-direction: row; 
+    justify-content: center; 
+    align-items: center; 
+    gap: 1rem; 
+    margin-top: 2rem;
+}
+
+.finish-button {
+    background-color: #2c5a77; 
+    border: none; 
+    border-radius: 10px; 
+
+    padding: 0.8rem 1.5rem; 
+    text-align: center; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+
+    color: white; 
+    font-size: 1rem; 
+    font-family: 'Montserrat'; 
+    font-weight: 600; 
+
+    cursor: pointer;
+
+    transition: background-color 0.3s ease, transform 0.2s ease; 
+}
+
+/* Hover effect for the finish button */
+.finish-button:hover {
+    background-color: #B2CEE3; 
+    transform: scale(1.05); 
+}
+
