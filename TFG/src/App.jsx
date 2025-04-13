@@ -166,6 +166,7 @@ function App() {
             questions={questions}
             honeypots={honeypots}
             onComplete={handleQuestionnaireComplete}
+            onReset={handleReset}
           />
       </div>   
     )}

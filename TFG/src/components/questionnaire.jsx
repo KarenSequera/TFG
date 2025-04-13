@@ -203,7 +203,7 @@ class Questionnaire extends Component {
                             Next
                         </button>
                         <button
-                            onClick={this.handleFinish}
+                            onClick={this.props.onReset}
                             className='reset-button'
                         >
                             Reset
