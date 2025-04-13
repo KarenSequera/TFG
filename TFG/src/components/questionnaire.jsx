@@ -4,9 +4,16 @@ import '../styles/Recommendations.css'
 
 class Questionnaire extends Component {
 
+    //  * Questionnaire constructor
+    //  * @param {Object} props
+    //  * @param {Question[]} props.questions - List of questions for the questionnaire
+    //  * @param {Honeypot[]} props.honeypots - List of honeypots used for recommendations
+    //  * @param {Function} props.onComplete - Callback function to execute when the questionnaire is completed
+    //  * @param {Function} props.onReset - Callback function to reset the questionnaire
     constructor(props){
         super(props);
 
+        //Initial state of the questionnaire
         this.state = {
             currentQuestion: 0, // Tracks the current question index
             isFinished: false, // Tracks if the questionnaire is finished
@@ -19,10 +26,16 @@ class Questionnaire extends Component {
         this.honeypots = props.honeypots;
     }
 
+    // QUESTIONNAIRE HANDLERS ////////////////////////////////////////
+
+    // Updates the selected answer for the current question of the questionnaire
+    // @param {int} index - The index of the selected answer
     handleAnswerChange = (index) => {
         this.setState({ currentAnswer: index }); // Update the selected answer
     };
 
+    // Handles the submitted answer:
+    // Updates honeypot scores, activates additional questions, and navigates to the next question or recommendations (if last)
     handleAnswerSubmit = () => {
         const { currentQuestion, currentAnswer } = this.state;
         let answer = this.questions[currentQuestion].answers[currentAnswer];
@@ -54,16 +67,16 @@ class Questionnaire extends Component {
             });
         }
 
-       // To make sure the questionnaire is not finished.
        // Not all the questions are active, so we need to find the next active question
         let nextQuestion = this.state.currentQuestion + 1;
         this.setState((prevState) => ({ questionCount: prevState.questionCount + 1 }));
         while( nextQuestion < this.questions.length && !this.questions[nextQuestion].active){
             nextQuestion++;
         }
-        
+
+        // If there are not more questions
         if( nextQuestion >= this.questions.length){
-            console.log('Questionnaire completed');
+            //console.log('Questionnaire completed');
             this.setState({showRecomendations : true})
         }
         else{
@@ -76,22 +89,7 @@ class Questionnaire extends Component {
 
     };
 
-    handleFinish = () => {
-        this.setState({isFinished: true});
-        this.props.onComplete();
-    }
-
-    handleNextRecommendation = () => {
-        this.setState((prevState) => ({
-            recommendationIndex: Math.min(prevState.recommendationIndex + 1, 2),
-        }));
-    };
-    
-    handlePreviousRecommendation = () => {
-        this.setState((prevState) => ({
-            recommendationIndex: Math.max(prevState.recommendationIndex - 1, 0),
-        }));
-    };
+    // ANSWER OPERATION FUNCTIONS ////////////////////////////////////////
 
     //  * Given an array of tags, this function returns the array indexes of the honeypot that contain all the tags in the array. 
     //  * @param {string[]} - tags to match
@@ -155,8 +153,32 @@ class Questionnaire extends Component {
             //console.log(pointsToSubstract, 'Points substracted to', this.honeypots[index].tags)
         });
     }
+
+    //HONEYPOT RECOMMENDATION STAGE HANDLERS ////////////////////////////////////////
+
+    // Navigates to the next recommendation taking into consideration that index cannot be greater than two (3 recommendations).
+    handleNextRecommendation = () => {
+        this.setState((prevState) => ({
+            recommendationIndex: Math.min(prevState.recommendationIndex + 1, 2),
+        }));
+    };
     
-    //FOR TESTING PURPOSE, C CHEAT TO SKIP QUESTIONNAIRE
+     // Navigates to the previous recommendation taking into consideration that index cannot be smaller than cero.
+    handlePreviousRecommendation = () => {
+        this.setState((prevState) => ({
+            recommendationIndex: Math.max(prevState.recommendationIndex - 1, 0),
+        }));
+    };
+    
+    // Marks the questionnaire as finished and triggers the onComplete callback
+    handleFinish = () => {
+        this.setState({isFinished: true});
+        this.props.onComplete();
+    }
+
+
+    //FOR TESTING PURPOSE, C CHEAT TO SKIP QUESTIONNAIRE ////////////////////////////////////////
+
     componentDidMount() {
         // Add a keydown event listener to skip to recommendations
         document.addEventListener('keydown', this.handleKeyPress);
@@ -174,12 +196,14 @@ class Questionnaire extends Component {
         }
     };
 
+    // RENDER ////////////////////////////////////////
+
     render() {
         //TODO: If the recommendations are too similar, check that at least, X tags different 
         const topHoneypots = [...this.honeypots].sort((a, b) => b.currentScore - a.currentScore).slice(0, 3);
         const currentRecommendation = topHoneypots[this.state.recommendationIndex];
         return (
-            <div className='background'>
+            <div className='background'> 
                 {!this.state.showRecomendations ? (
                     <div className='white-square'>
                         <h1>Question {this.state.questionCount+1}:</h1>
@@ -197,7 +221,7 @@ class Questionnaire extends Component {
                         </ul>
                         <button
                             onClick={this.handleAnswerSubmit}
-                            disabled={this.state.currentAnswer === null} // Disable the button if no answer is selected
+                            disabled={this.state.currentAnswer === null} 
                             className='next-button'
                         >
                             Next
