@@ -258,7 +258,7 @@ class Questionnaire extends Component {
                                 className='recommendation-next-button'
                             >
                         </button>
-                        <button onClick={this.handleFinish} className='finish-button'>Finish</button>
+                        <button onClick={this.handleFinish} className='recommendation-finish-button'>Finish</button>
                     </div>
                 )}
             </div>

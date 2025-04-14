@@ -12,25 +12,24 @@ html, body {
 
 /*Background image*/
 
-/*Background white square that contains all the elements in the questionnaire*/
+/*Background white square that contains all the elements*/
 .recommendations-white-square {
     background-color: white;
-    border-radius: 30px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 20px; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
 
-    width: 75%;
-    max-width: 75%;
-    min-height: 75%; 
-    height: auto; 
-    padding: 2rem;
+    width: 73%; 
+    max-width: 73%;
+    width: 75%; 
+    min-height: 75%;
+    height: auto;
+    padding: 24px; 
 
     text-align: center; 
     display: flex; 
     flex-direction: column; 
     align-items: center; 
     justify-content: flex-start;
-
-    gap: 1rem; 
 
     position: relative; 
 }
@@ -41,11 +40,11 @@ html, body {
     text-align: center; 
     align-self: center; 
 
-    margin: 0; 
-    margin-top: 10px; 
+    margin: 0; ;
+    margin-bottom: 10px; 
     padding-top: 0; 
 
-    font-size: 2.5rem;
+    font-size: 35px;
     color: #204054; 
 }
 
@@ -53,13 +52,13 @@ html, body {
 /*Container for the recommendation*/
 .recommendation-details {
     border: 3px solid #ccc;
-    padding: 20px;
+    padding: 15px;
 
     width: 65%;
-    height: 500px;
+    height: 450px;
     
     text-align: left;
-    font-size: clamp(1rem, 2vw, 1.3rem); 
+    font-size: clamp(10px, 2vw, 18px); 
     line-height: 1.8;
     color: #555;
 
@@ -73,7 +72,7 @@ html, body {
 /*Honeypot subtitle*/
 .recommendation-details h2{
     text-align: center;
-    font-size: 1.8rem;
+    font-size: 25px;
     line-height: 1.8;
     color: #2c5a77;
 }
@@ -145,20 +144,20 @@ html, body {
 }
 
 /*Finish button*/
-.finish-button {
+.recommendation-finish-button {
     background-color: #2c5a77;
     border: none;
     border-radius: 10px;
 
     width: 100%;
-    max-width: 150px;
+    max-width: 140px;
     height: 100%;
-    max-height: 50px;
+    max-height: 40px;
 
-    padding: 0.5rem 1.5rem;
-    font-size: 1.2rem;
+    padding: 8px 24px;
+    font-size: 15px;
     font-family: 'Montserrat';
-    font-weight: 600;
+    font-weight: 700;
     color: white;
 
     cursor: pointer;
@@ -167,7 +166,7 @@ html, body {
 }
 
 /*Finish button hover*/
-.finish-button:hover {
+.recommendation-finish-button:hover {
     background-color: #B2CEE3;
     transform: scale(1.05);
 }

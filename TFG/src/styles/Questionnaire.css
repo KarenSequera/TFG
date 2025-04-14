@@ -33,22 +33,21 @@ html, body {
 /*Background white square that contains all the elements in the questionnaire*/
 .white-square {
     background-color: white;
-    border-radius: 30px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 20px; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
 
-    width: 75%;
-    max-width: 75%;
-    min-height: 75%; 
-    height: auto; 
-    padding: 2rem;
+    width: 73%; 
+    max-width: 73%;
+    width: 75%; 
+    min-height: 75%;
+    height: auto;
+    padding: 24px; 
 
     text-align: center; 
     display: flex; 
     flex-direction: column; 
     align-items: center; 
     justify-content: flex-start;
-
-    gap: 1rem; 
 
     position: relative; 
 }
@@ -60,11 +59,11 @@ html, body {
     align-self: center; 
 
     margin: 0; 
-    margin-top: 10px; 
+    margin-top: 5px; 
     padding-top: 0; 
 
-    font-size: 3.5rem;
-    color: #204054; 
+    font-size: 45px;
+    color:  #204054; 
 }
 
 /*Question text*/
@@ -76,7 +75,7 @@ html, body {
     
     margin-top: 4%; 
     
-    font-size: 2rem;
+    font-size: 25px;
     color: #555; 
     line-height: 1.8; 
 }
@@ -90,8 +89,8 @@ html, body {
     text-align: left;
 
     padding: 0;
-    margin: 10px 0 0 0;
-    margin-top: 5px;
+    margin: 8px 0 0 0;
+    margin-top: 3px;
 
     list-style-type: none; 
 }
@@ -100,12 +99,12 @@ html, body {
 .white-square ul li {
     position: relative; 
 
-    margin: 2rem 0; 
-    padding-left: 2rem; 
+    margin: 32px 0; 
+    padding-left: 32px; 
 
-    font-size: 1.5rem; 
+    font-size: 20px; 
     color: #555; 
-    line-height: 1.8; 
+    line-height: 20px; 
    
     cursor: pointer;
 
@@ -121,8 +120,8 @@ html, body {
     border-radius: 10px; 
 
     content: ''; 
-    width: 1rem;
-    height: 1rem;
+    width: 16px;
+    height: 16px;
 
     position: absolute;
     left: 0;
@@ -171,7 +170,7 @@ html, body {
     border-radius: 10px; 
 
     width: 100%;
-    max-width: 150px;
+    max-width: 140px;
     height: 100%;
     max-height: 40px;
 
@@ -179,7 +178,7 @@ html, body {
     bottom: 3%; 
     right: 3%;
 
-    font-size: 1.25rem; 
+    font-size: 15px; 
     text-align: center; 
     font-family: 'Montserrat', sans-serif; 
     font-weight: 700; 
@@ -218,7 +217,7 @@ html, body {
     border-radius: 10px; 
 
     width: 100%;
-    max-width: 150px;
+    max-width: 140px;
     height: 100%;
     max-height: 40px;
 
@@ -226,7 +225,7 @@ html, body {
     bottom: 3%; 
     left: 3%;
 
-    font-size: 1.25rem; 
+    font-size: 15px; 
     text-align: center; 
     font-family: 'Montserrat', sans-serif; 
     font-weight: 700; 
