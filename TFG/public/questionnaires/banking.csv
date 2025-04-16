@@ -1,0 +1,67 @@
+Tags,QuestionActive,EnableQuestionTags,Questions,Answer,AddPointsHoneypotTags,PointsToAdd,SubstractPointsHoneypotTags,PointsToSubstract
+,TRUE,,How many employees does the organization have?,1. Between 1 and 9 employees.,[LOW_INTERACTION],10,,
+,,,,2. Between 50 and 249 employees.,"[CORPORATION,PII],[CORPORATION,INSIDER_THREAT]",10,,
+,,,,3. More than 250 employees.,"[CORPORATION,PII],[CORPORATION,INSIDER_THREAT],[CORPORATION,PHISHING],[HONEYNET]",10,,
+,TRUE,,What infrastructure model does your organization follow?,1. Fully Cloud.,,,"[CORPORATION,ON_PREM]",10
+,,,,2. On-Premise.,,,"[CORPORATION,CLOUD]",10
+,,,,3. Hybrid.,,,"[CORPORATION,CLOUD]",10
+,TRUE,,"Does your organization deal with really sensitive information corporate information? (e.g. IP, strategic plans, agreements...)",1. Yes. ,"[CORPORATION,SCI]",10,,10
+,,,,2. No. ,,,,
+,,,Does your organization store and process sensitive financial data?,"1. Yes, we store and process financial information ourselves.","[FINANCIAL, FINANCIAL_DATABASE]",10,,
+,,,,"2. Yes, we use third-party services to store and process this data.","[FINANCIAL, FINANCIAL_DATA]",10,,
+,,,,"3. No, we do not store financial information. ",,,"[FINANCIAL, FINANCIAL_DATA]",10
+,TRUE,,What email services does your company employ?,1. Free email services.,"[CORPORATION,SPAMTRAP]",10,,
+,,,,2. Own email server.,"[CORPORATION,MAILSERVER]",10,,
+,,,,3. Email-as-a-Service.,"[CORPORATION,SPAMTRAP]",10,,
+,,,,4. We do not use mail services.,,,"[CORPORATION,PHISHING]",100
+,TRUE,,Do your employees own work devices?,1. Yes.,"[CORPORATION,EMPLOYEE_ENDPOINT]",10,,
+,,,,"2. No, they use their personal devices.","[CORPORATION,REMOTE_ACCESS]",10,"[CORPORATION,EMPLOYEE_ENDPOINT]",100
+,TRUE,,Do your employees remotely access the organization's resources?,"1. Yes, through a secure access method.",,,,
+,,,,"2. Yes, directly over the internet.","[CORPORATION,REMOTE_ACCESS]",10,,
+,,,,"3. No, employees cannot access remotely.",,,"[CORPORATION,REMOTE_ACCESS]",100
+,TRUE,,What authentication method does your organization use to protect customer banking accounts?,1. Customer access is secured with strong multi-factor authentication.  ,,,,
+,,,,2. Customer access is password-based only.,"[FINANCIAL, BAKING_ACCOUNTS]",10,,
+,,,,3. We do not provide this kind of financial services. ,,,"[FINANCIAL, BAKING_ACCOUNTS]",100
+,TRUE,,Does your organization monitor unauthorized access by employees or contractors?,"1. Yes, we have an insider risk management program and employ strong controls, like RBAC and the least privileged access.",,,,
+,,,,"2. No, we do not.","[CORPORATION,INSIDER_THREAT]",10,,
+,TRUE,,Does your organization have web services?,"1. Yes, we host and manage our own web services. ","[CORPORATION,WEB_SERVICES]",10,,
+,,,,"2. Yes, but we rely on third-party providers. ",,,"[CORPORATION,WEB_SERVICES]",100
+,,,,"3. No, we do not have web services. ",,,"[CORPORATION,WEB_SERVICES]",100
+,TRUE,,How does your organization handle database management?,1. We host and manage our own databases. ,"[CORPORATION, DATABASE]",10,,
+,,,,2. We rely on third-party providers. ,,,,
+,,,,"3. No, we do not have databases. ",,,"[CORPORATION, DATABASE]",100
+,TRUE,,Does your organization employ IoT devices?,"1. Yes, we have IoT devices such as cameras, printers, HVAC, etc. They are publicly accessible through the Internet.","[CORPORATION, IOT]",10,,
+,,,,"2. Yes, we have IoT devices such as cameras, printers, HVAC, etc. They are located in our internal network, segmented from other IT and with strict access controls.",,,,
+,,,,"3. No, we do not use IoT devices.",,,"[CORPORATION, IOT]",100
+,TRUE,,Does your organization use financial APIs? ,"1. Yes, we offer a financial API service that allows customers or third parties to integrate with our systems. ","[FINANCIAL, FINANCIAL_API]",10,,
+,,,,"2. Yes, we use financial APIs to connect with banking services or financial institutions.",,,,
+,,,,"3. No, we do not use financial APIs.",,,"[FINANCIAL, FINANCIAL_API]",100
+,TRUE,,Does your organization employ the SWIFT Network?,"1. Yes, we personally handle the SWIFT connections.","[FINANCIAL, SWIFT]",10,,
+,,,,"2. Yes, we access SWIFT through a service bureau. ",,,"[FINANCIAL, SWIFT]",100
+,,,,"3. No, we do not use SWIFT network. ",,,"[FINANCIAL, SWIFT]",100
+,TRUE,,Does your organization frequently update IT devices/systems?,"1. Yes, we have a regular update and replacement cycle.",,,[VULNERABILITY],10
+,,,,2. Rarely/Never. We have legacy software and equipment.,[VULNERABILITY],10,,
+,TRUE,,Does your organization change default unsecure configurations of IT devices/systems? (e.g. passwords),"1. Yes, always. ",,,[MISCONFIGURATION],10
+,,,,2. Rarely/Never. It is likely that we have misconfigured devices. ,[MISCONFIGURATION],10,,
+,TRUE,,Does your organization segment its network?,"1. Yes, with strict internal segmentation.",,,,
+,,,,"2. Yes, some segmentation.",[LATERAL_MOVEMENT],10,,
+,,,,3. The entire network is accessible internally.,[LATERAL_MOVEMENT],10,[VULNERABILITY],100
+,TRUE,,How does your organization detect network intrusions?,1. We employ SIEM and/or IDS/IPS for real-time log integration and monitoring. ,,,,
+,,,,2. We manually review logs for suspicious activity. ,[LOW_INTERACTION],10,"[HIGH_INTERACTION],[VULNERABILITY],[HONEYNET]",100
+,,,,3. We do not monitor for intrusions.,[HONEYTOKEN],10,"[HIGH_INTERACTION],[VULNERABILITY],[HONEYNET]",100
+,TRUE,,Does your organization have a dedicated security team?,"1. Yes, we have a cybersecurity team.",[HONEYNET],10,,
+,,,,"2. Yes, we rely on third-party providers.",,,,
+,,,,"3. No, our IT team handles security, but it is not specialized.",[LOW_INTERACTION],10,"[HIGH_INTERACTION],[VULNERABILITY],[HONEYNET]",100
+,,,,4. No one reviews security.,[HONEYTOKEN],10,"[HIGH_INTERACTION],[VULNERABILITY],[HONEYNET]",100
+,TRUE,,Is your organization willing to allocate monetary resources into honeypot deployment?,1. Yes. ,"[HONEYNET],[HIGH_INTERACTION]",10,,
+,,,,"2. No, we work under a limited budget. ","[LOW_INTERACTION],[HONEYTOKEN]",10,,
+,TRUE,,"Does your organization prefer to detect attackers when they first try to access the network, while moving around inside, or when they attempt to achieve their final goal (e.g. exfiltrating, destroying critical data, disrupting operations, etc.)?",1. We want to prioritize the detection of attackers trying to enter our network perimeter. ,[INITIAL_ACCESS],20,,
+,,,,2. We want to prioritize detections of attackers navigating through the network ,[LATERAL_MOVEMENT],20,,
+,,,,3. We want to prioritize detections of attackers when they attempt to damage our organization. ,[IMPACT],20,,
+,TRUE,,Does your organization prefer to prioritize the protection of financial-related systems or general corporate threats?,1. We want to prioritize the protection of systems related to financial operations.,[FINANCIAL],20,,
+,,,,2. We want to prioritize the protection of threats related to the corporate systems. ,[CORPORATION],20,,
+,TRUE,,What's the most impactful security event your organization has suffered? (Choose one or more),1. Ransomware.,[RANSOMWARE],20,,
+,,,,2. Social Engineering.,[PHISHING],20,,
+,,,,3. Threats against data.,[DATA_LEAKS],20,,
+,,,,6. Insider Threats.,[INSIDER_THREAT],20,,
+,,,,7. Non-of the above. ,,,,

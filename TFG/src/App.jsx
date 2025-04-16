@@ -50,7 +50,7 @@ function App() {
     }
 
     //TODO: Erase this line once all sectors have been implemented
-    selectedSector = 'energy';
+    selectedSector = 'banking';
     setSector(selectedSector); // Set the selected sector
 
     try {
