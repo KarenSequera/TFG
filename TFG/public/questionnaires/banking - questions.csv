@@ -53,8 +53,8 @@ Tags,QuestionActive,EnableQuestionTags,Questions,Answer,AddPointsHoneypotTags,Po
 ,,,,"2. Yes, we rely on third-party providers.",,,,
 ,,,,"3. No, our IT team handles security, but it is not specialized.",[LOW_INTERACTION],10,"[HIGH_INTERACTION],[VULNERABILITY],[HONEYNET]",100
 ,,,,4. No one reviews security.,[HONEYTOKEN],10,"[HIGH_INTERACTION],[VULNERABILITY],[HONEYNET]",100
-,TRUE,,Is your organization willing to allocate monetary resources into honeypot deployment?,1. Yes. ,"[HONEYNET],[HIGH_INTERACTION]",10,,
-,,,,"2. No, we work under a limited budget. ","[LOW_INTERACTION],[HONEYTOKEN]",10,,
+,TRUE,,Is your organization willing to allocate monetary resources into honeypot deployment?,1. Yes. ,"[HONEYNET],[HIGH_INTERACTION]",20,,
+,,,,"2. No, we work under a limited budget. ","[LOW_INTERACTION],[HONEYTOKEN]",20,[HONEYNET],10
 ,TRUE,,"Does your organization prefer to detect attackers when they first try to access the network, while moving around inside, or when they attempt to achieve their final goal (e.g. exfiltrating, destroying critical data, disrupting operations, etc.)?",1. We want to prioritize the detection of attackers trying to enter our network perimeter. ,[INITIAL_ACCESS],20,,
 ,,,,2. We want to prioritize detections of attackers navigating through the network ,[LATERAL_MOVEMENT],20,,
 ,,,,3. We want to prioritize detections of attackers when they attempt to damage our organization. ,[IMPACT],20,,

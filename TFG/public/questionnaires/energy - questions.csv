@@ -1,0 +1,96 @@
+Tags,QuestionActive,EnableQuestionTags,Questions,Answer,AddPointsHoneypotTags,PointsToAdd,SubstractPointsHoneypotTags,PointsToSubstract
+,TRUE,,How many employees does the organization have?,1. Between 1 and 9 employees.,[LOW_INTERACTION],10,,
+,,,,2. Between 50 and 249 employees.,"[CORPORATION,PII],[CORPORATION,INSIDER_THREAT]",10,,
+,,,,3. More than 250 employees.,"[CORPORATION,PII],[CORPORATION,INSIDER_THREAT],[CORPORATION,PHISHING],[HONEYNET]",10,,
+,TRUE,[1],Is your company directly involved in energy production and distribution?,"1. Yes, we produce and/or distribute energy. ",,,,
+,,,,"2. No, we are dedicated to market, operations and service providers. ",,,,
+[1],FALSE,[ICS],Does your organization use Distributed Energy Resources (DER) to generate Energy?,1. We are centralized energy productors/distributors. ,,,,
+,,[DER],,2. Our organization only uses DER to generate energy.,,,,
+,,"[DER],[ICS]",,3. We employ large-scale centralized generation facilities as well as DER.  ,,,,
+,TRUE,,What infrastructure model does your organization follow?,1. Fully Cloud.,,,"[CORPORATION,ON_PREM]",100
+,,,,2. On-Premise.,,,"[CORPORATION,CLOUD]",100
+,,,,3. Hybrid.,,,"[CORPORATION,CLOUD]",100
+,TRUE,,What email services does your company employ?,1. Free email services.,"[CORPORATION,SPAMTRAP]",10,,
+,,,,2. Own email server.,"[CORPORATION,MAILSERVER]",10,,
+,,,,3. Email-as-a-Service.,"[CORPORATION,SPAMTRAP]",10,,
+,,,,4. We do not use mail services.,,,"[CORPORATION,PHISHING]",100
+,TRUE,,Do your employees own work devices?,1. Yes.,"[CORPORATION,EMPLOYEE_ENDPOINT]",10,,
+,,,,"2. No, they use their personal devices.","[CORPORATION,REMOTE_ACCESS]",10,"[CORPORATION,EMPLOYEE_ENDPOINT]",100
+,TRUE,,Do your employees remotely access the organization's resources?,"1. Yes, through a secure access method.",,,,
+,,,,"2. Yes, directly over the internet.","[CORPORATION,REMOTE_ACCESS]",10,,
+,,,,"3. No, employees cannot access remotely.",,,"[CORPORATION,REMOTE_ACCESS]",100
+,TRUE,,Does your organization monitor unauthorized access by employees or contractors?,"1. Yes, we have an insider risk management program and employ strong controls, like RBAC and the least privileged access.",,,,
+,,,,"2. No, we do not.","[CORPORATION,INSIDER_THREAT]",10,,
+,TRUE,,"Does your organization deal with really sensitive information corporate information? (e.g. IP, trade secrets...)",1. Yes. ,"[CORPORATION,SCI]",10,,
+,,,,2. No. ,,,,
+,TRUE,,Does your organization store customer information?,"1. Yes, we store and process customer information internally.","[CORPORATION,DATABASE_CUSTOMER]",10,,
+,,,,"2. Yes, we use third-party services to store and process customer data.",,,"[CORPORATION,DATABASE_CONSUMER]",100
+,,,,"3. No, we do not store customer information. ",,,"[CORPORATION,DATABASE_CONSUMER]",100
+,TRUE,,Does your organization have web services?,"1. Yes, we host and manage our own web services. ","[CORPORATION,WEB_SERVICES]",10,,
+,,,,"2. Yes, but we rely on third-party providers. ",,,"[CORPORATION,WEB_SERVICES]",100
+,,,,"3. No, we do not have web services. ",,,"[CORPORATION,WEB_SERVICES]",100
+,TRUE,,Does your organization frequently update IT devices/systems?,"1. Yes, we have a regular update and replacement cycle.",,,"[CORPORATION,VULNERABILITY]",10
+,,,,2. Rarely/Never. We have legacy software and equipment.,"[CORPORATION,VULNERABILITY]",10,,
+,TRUE,,Does your organization employ IoT devices?,"1. Yes, we have IoT devices such as cameras, printers, HVAC, etc. They are publicly accessible through the Internet.","[CORPORATION,IOT]",10,,
+,,,,"2. Yes, we have IoT devices such as cameras, printers, HVAC, etc. They are located in our internal network, segmented from other IT and with strict access controls.",,,,
+,,,,"3. No, we do not use IoT devices.",,,"[CORPORATION, IOT]",100
+,TRUE,,Does your organization change default unsecure configurations of IT devices/systems? (e.g. passwords),"1. Yes, always. ",,,"[CORPORATION,MISCONFIGURATION]",10
+,,,,2. Rarely/Never. It is likely that we have misconfigured devices. ,"[CORPORATION,MISCONFIGURATION]",10,,
+,TRUE,,Does your organization segment its network?,"1. Yes, with strict internal segmentation.",,,,
+,,,,"2. Yes, some segmentation.",,,,
+,,,,3. The entire network is accessible internally.,"[CORPORATION,LATERAL_MOVEMENT]",10,"[CORPORATION,VULNERABILITY]",100
+[DER],FALSE,,"Are your DER resources centralized in large installations with dedicated utility connections, or are they scattered across consumer endpoints and then virtually aggregated?",1. Centralized. ,,,"[DER,VIRTUAL]",100
+,,,,2. Scattered and then aggregated. ,,,"[DER,PHYSICAL]",100
+[DER],FALSE,,Are your DER or their IoT components directly connected to the internet. ,"1. Yes, DER and/or their IoT components directly face the internet without security layers.","[DER,VIRTUAL]",10,,
+,,,,"2. Yes, but we employ control access security.",,,,
+,,,,"3. No, they are segmented and only accessible in the internal network.","[DER,PHYSICAL]",10,,
+,,,,4. Not sure.,,,,
+[DER],FALSE,,Are your DER communications secured? ,"1. Yes, all the communications are encrypted and verified. ",,,"[DER,MISCONFIGURATION]",10
+,,,,"2. No, communications use default protocol configuration without encryption or authentication. ","[DER,MISCONFIGURATION]",10,,
+,,,,3. Not sure. ,"[DER,MISCONFIGURATION]",10,,
+[DER],FALSE,,Have DER's IoT insecure default configurations been changed? (e.g. passwords),1. Yes.,,,"[DER,MISCONFIGURATION]",10
+,,,,2. No.,"[DER,MISCONFIGURATION]",10,,
+,,,,3. Not sure.,"[DER,MISCONFIGURATION]",10,,
+[DER],FALSE,,Are DER's components frequently patched or updated? ,"1. Yes, we have a regular update and replacement cycle.",,,"[DER,VULNERABILITY]",10
+,,,,3. Rarely/Never. We have legacy software and equipment.,"[DER,VULNERABILITY]",10,,
+[DER],FALSE,,Have your DER's systems ever been breached?,1. Yes.,[DER],10,,
+,,,,"2. No, because we detected them and remediated them. ",,,[DER],10
+[ICS],FALSE,,Does your organization separate IT and OT networks?,"1. Yes, with strict segmentation with firewalls and DMZ. ","[ICS,DMZ]",10,,
+,,,,"2. Partially, there are some shared resources. ","[ICS,LATERAL_MOVEMENT]",10,,
+,,,,3. IT and OT are interconnected without isolation.,"[ICS,L2],[ICS,LATERAL_MOVEMENT]",10,,
+,,,,4. Not sure.,"[ICS,L2]",10,,
+[ICS],FALSE,,How is remote access to the ICS system performed?,1. Remote access is strictly monitored and secure. ,,,,
+,,,,2. Directly accessible via the internet. ,"[ICS,RAS],[ICS,LATERAL_MOVEMENT]",10,,
+,,,,3. Remote access is not allowed.,,,"[ICS,RAS]",100
+,,,,4. Not sure.,"[ICS,RAS]",10,,
+[ICS],FALSE,,Are ICS devices' unsecure default configurations changed? (e.g. passwords),1. Yes.,,,"[ICS,MISCONFIGURATION]",10
+,,,,2. No.,"[ICS,MISCONFIGURATION]",10,,
+,,,,3. Not sure.,"[ICS,MISCONFIGURATION]",10,,
+[ICS],FALSE,,Are ICS devices and components regularly updated?,"1. Yes, we have a regular update and replacement cycle.",,,"[ICS,VULNERABILITY]",10
+,,,,"2. No/Rarely, we have legacy software and equipment.","[ICS,VULNERABILITY]",10,,
+[ICS],FALSE,[2],Has your ICS system ever been breached or compromised?,1. Yes. ,[ICS],10,,
+,,,,"2. No, because we detected them and remediated them. ",,,[ICS],10
+[2],FALSE,,Which components were the most affected during the breach? ,1.  IT services.,"[ICS,L3]",10,,
+,,,,"2.  Control Systems (SCADA, HMI...).","[ICS,L2],[ICS,LATERAL_MOVEMENT]",10,,
+,,,,"3.  Process systems controlers (RTU, PLC...).","[ICS,L1],[ICS,LATERAL_MOVEMENT]",10,,
+,,,,"4.  Process themselves (sensors, drives, actuators, robots...).","[ICS,LATERAL_MOVEMENT]",10,,
+,TRUE,,How does your organization detect network intrusions?,1. We employ SIEM and/or IDS/IPS for real-time log integration and monitoring. ,,,,
+,,,,2. We manually review logs for suspicious activity. ,,,"[HIGH_INTERACTION],[VULNERABILITY]",100
+,,,,3. We do not monitor for intrusions.,,,"[HIGH_INTERACTION],[VULNERABILITY]",100
+,TRUE,,Does your organization have a dedicated security team?,"1. Yes, we have a cybersecurity team.",[HONEYNET],10,,
+,,,,"2. Yes, we rely on third-party providers.",,,,
+,,,,"3. No, our IT team handles security, but it is not specialized.",[LOW_INTERACTION],10,,
+,,,,4. No one reviews security.,[HONEYTOKEN],20,,
+,TRUE,,Is your organization willing to allocate monetary resources into honeypot deployment?,1. Yes. ,"[HONEYNET],[HIGH_INTERACTION]",20,,
+,,,,"2. No, we work under a limited budget. ","[LOW_INTERACTION],[HONEYTOKEN]",20,[HONEYNET],10
+,TRUE,,"Does your organization prefer to detect attackers when they first try access the network, while moving around inside, or when they attempt to achieve their final goal (e.g. exfiltrating, destroying critical data, disrupting operations, etc.)?
+
+",1. We want to prioritize detections of attackers triying to enter our network perimeter. ,[INITIAL_ACCESS],20,,
+,,,,2. We want to prioritize detections of attackers navigating through the network .,[LATERAL_MOVEMENT],20,,
+,,,,3. We want to prioritize detections of attackers when they attempt to damage our organization. ,[IMPACT],20,,
+,TRUE,,What is the most impactful security event your organization has suffered?,1. Ransomware.,[RANSOMWARE],20,,
+,,,,2. Social engineering.,"[CORPORATION,PHISHING],[CORPORATION,LATERAL_MOVEMENT]",20,,
+,,,,3. Threats against data.,"[CORPORATION,DATA_LEAKS]",20,,
+,,,,4. OT attack.,"[DER],[ICS]",20,,
+,,,,5. Insider threats.,"[CORPORATION,INSIDER_THREAT]",20,,
+,,,,6. None of the above. ,,,,

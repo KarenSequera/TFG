@@ -100,10 +100,10 @@ class Questionnaire extends Component {
                     differentTags.push(currentHoneypotTags.filter(tag => !selectedHoneypotTags.includes(tag)))
                     differentTags.push(selectedHoneypotTags.filter(tag => !currentHoneypotTags.includes(tag)))
                     differentTags = differentTags.flat()
-                    console.log("Tags in current honeypot", currentHoneypotTags)
-                    console.log("Tags in selected honeypot", selectedHoneypotTags)
-                    console.log("Difference", differentTags)
-                    return differentTags.length > 2;
+                    //console.log("Tags in current honeypot", currentHoneypotTags)
+                    //console.log("Tags in selected honeypot", selectedHoneypotTags)
+                    //console.log("Difference", differentTags)
+                    return differentTags.length > 3;
                 });
                 if (isDifferent) {
                     this.topHoneypots.push(honeypot);
