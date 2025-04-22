@@ -22,7 +22,7 @@ const testParser = async () => {
         console.log(`      Tags Add: ${JSON.stringify(answer.tagsAdd)}`);
         console.log(`      Points to Add: ${answer.pointsToAdd}`);
         console.log(`      Tags Subtract: ${JSON.stringify(answer.tagsSubtract)}`);
-        console.log(`      Points to Subtract: ${answer.pointsToSubstract}`);
+        console.log(`      Points to Subtract: ${answer.pointsToSubtract}`);
         console.log(`      Tags Question: ${JSON.stringify(answer.tagsQuestion)}`);
       });
 

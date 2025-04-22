@@ -49,11 +49,11 @@ class Questionnaire extends Component {
             });
         }
 
-        // Substract points to Honeypots
-        if (answer.tagsSubstract) {
-            answer.tagsSubstract.forEach(tags => {
+        // Subtract points to Honeypots
+        if (answer.tagsSubtract) {
+            answer.tagsSubtract.forEach(tags => {
                 let indexes = this.getHoneypotMatchingTags(tags);
-                this.substractPointsToHoneypots(indexes, answer.pointsToSubstract);
+                this.subtractPointsToHoneypots(indexes, answer.pointsToSubtract);
             });
         }
         
@@ -170,13 +170,13 @@ class Questionnaire extends Component {
         });
     }
 
-    //  * Substracts points to the honeypots in the index positions specified
-    //  * @param {int[]} indexes - Positions of the honeypots to substract points
-    //  * @param {int} pointsToSubstract - Points to substract
-    substractPointsToHoneypots = (indexes, pointsToSubstract) => {
+    //  * Subtracts points to the honeypots in the index positions specified
+    //  * @param {int[]} indexes - Positions of the honeypots to subtract points
+    //  * @param {int} pointsToSubtract - Points to subtract
+    subtractPointsToHoneypots = (indexes, pointsToSubtract) => {
         indexes.forEach(index =>{
-            this.honeypots[index].substractPoints(pointsToSubstract);
-            //console.log(pointsToSubstract, 'Points substracted to', this.honeypots[index].tags)
+            this.honeypots[index].subtractPoints(pointsToSubtract);
+            //console.log(pointsToSubtract, 'Points subtracted to', this.honeypots[index].tags)
         });
     }
 

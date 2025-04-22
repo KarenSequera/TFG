@@ -67,8 +67,8 @@ export const parseQuestions = async (sector) => {
                       text: row.Answer,
                       tagsAdd: row.AddPointsHoneypotTags ? parseTags(row.AddPointsHoneypotTags) : [],
                       pointsToAdd: row.PointsToAdd ? parseInt(row.PointsToAdd, 10) : 0,
-                      tagsSubstract: row.SubstractPointsHoneypotTags ? parseTags(row.SubstractPointsHoneypotTags) : [],
-                      pointsToSubstract: row.PointsToSubstract ? parseInt(row.PointsToSubstract, 10) : 0,
+                      tagsSubtract: row.SubtractPointsHoneypotTags ? parseTags(row.SubtractPointsHoneypotTags) : [],
+                      pointsToSubtract: row.PointsToSubtract ? parseInt(row.PointsToSubtract, 10) : 0,
                       tagsQuestion: row.EnableQuestionTags ? parseTags(row.EnableQuestionTags) : [],
                   });
                   currentQuestion.answers.push(answer);

@@ -1,4 +1,4 @@
-Tags,QuestionActive,EnableQuestionTags,Questions,Answer,AddPointsHoneypotTags,PointsToAdd,SubstractPointsHoneypotTags,PointsToSubstract
+Tags,QuestionActive,EnableQuestionTags,Questions,Answer,AddPointsHoneypotTags,PointsToAdd,SubtractPointsHoneypotTags,PointsToSubtract
 ,TRUE,,How many employees does the organization have?,1. Between 1 and 9 employees.,[LOW_INTERACTION],10,,
 ,,,,2. Between 50 and 249 employees.,"[CORPORATION,PII],[CORPORATION,INSIDER_THREAT]",10,,
 ,,,,3. More than 250 employees.,"[CORPORATION,PII],[CORPORATION,INSIDER_THREAT],[CORPORATION,PHISHING],[HONEYNET]",10,,

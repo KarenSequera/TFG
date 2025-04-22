@@ -57,11 +57,11 @@ class Honeypot {
     }
 
   /**
-   * Adds points to substract to the current score.
-   * @param {int} [pointsToSubstract] - Points to substract to the current score.
+   * Adds points to subtract to the current score.
+   * @param {int} [pointsToSubtract] - Points to subtract to the current score.
    */
-    substractPoints(pointsToSubstract) {
-        this.currentScore = this.currentScore - pointsToSubstract ;
+    subtractPoints(pointsToSubtract) {
+        this.currentScore = this.currentScore - pointsToSubtract ;
     }
 
   /**
