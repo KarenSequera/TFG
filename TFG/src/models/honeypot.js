@@ -31,23 +31,7 @@ class Honeypot {
       this.initialScore = initialScore; 
       this.currentScore = currentScore; 
     }
-
-  /**
-   * Returns the attributes of the honeypot.
-   */
-    getHoneypot() {
-      return {
-        tags: this.tags,
-        type: this.type,
-        objective: this.objective,
-        location: this.location,
-        description: this.description,
-        mitreTactic: this.mitreTactic,
-        initialScore: this.initialScore,
-        currentScore: this.currentScore,
-      };
-    }
-
+    
   /**
    * Adds points to add to the current score.
    * @param {int} [pointsToAdd] - Points to add to the current score.
@@ -64,12 +48,6 @@ class Honeypot {
         this.currentScore = this.currentScore - pointsToSubtract ;
     }
 
-  /**
-   * Sets current score to the initial value. 
-   */
-    resetScore(){
-        this.currentScore = this.initialScore
-    }
 }
   
 export default Honeypot;

@@ -1,9 +1,9 @@
 import Answer from "./Answer.js";
-
 /**
  * Represents a Question in the questionnaire.
  */
 class Question {
+  #active
   /**
    * Creates a new Question instance.
    * @param {Object} params - The parameters for the Question.
@@ -21,25 +21,21 @@ class Question {
     this.tags = tags;
     this.text = text;
     this.answers = answers;
-    this.active = active;
+    this.#active = active;
   }
   /**
    * Activates the question
   */
-    activateQuestion(){
-        this.active = true;
-    }
+  activateQuestion(){
+    this.#active = true;
+  }
 
   /**
-   * Returns all the attributes of the object
-  */
-    getQuestion() {
-      return {
-        tags: this.tags,
-        text: this.text,
-        answers: this.answers,
-        active: this.active
-      };
-    }
+   * Returns whether the question is active or not
+   * @returns 
+   */
+  isActive(){
+    return this.#active;
+  }
 }  
 export default Question;

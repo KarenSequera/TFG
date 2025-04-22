@@ -3,7 +3,7 @@ Tags,QuestionActive,EnableQuestionTags,Questions,Answer,AddPointsHoneypotTags,Po
 ,,,,2. Between 50 and 249 employees.,"[CORPORATION,PII],[CORPORATION,INSIDER_THREAT]",10,,
 ,,,,3. More than 250 employees.,"[CORPORATION,PII],[CORPORATION,INSIDER_THREAT],[CORPORATION,PHISHING],[HONEYNET]",10,,
 ,TRUE,[1],Is your company directly involved in energy production and distribution?,"1. Yes, we produce and/or distribute energy. ",,,,
-,,,,"2. No, we are dedicated to market, operations and service providers. ",,,,
+,,,,"2. No, we are dedicated to market, operations and service providers. ",,,"[ICS],[DER]",100
 [1],FALSE,[ICS],Does your organization use Distributed Energy Resources (DER) to generate Energy?,1. We are centralized energy productors/distributors. ,,,,
 ,,[DER],,2. Our organization only uses DER to generate energy.,,,,
 ,,"[DER],[ICS]",,3. We employ large-scale centralized generation facilities as well as DER.  ,,,,
@@ -75,12 +75,12 @@ Tags,QuestionActive,EnableQuestionTags,Questions,Answer,AddPointsHoneypotTags,Po
 ,,,,"3.  Process systems controlers (RTU, PLC...).","[ICS,L1],[ICS,LATERAL_MOVEMENT]",10,,
 ,,,,"4.  Process themselves (sensors, drives, actuators, robots...).","[ICS,LATERAL_MOVEMENT]",10,,
 ,TRUE,,How does your organization detect network intrusions?,1. We employ SIEM and/or IDS/IPS for real-time log integration and monitoring. ,,,,
-,,,,2. We manually review logs for suspicious activity. ,,,"[HIGH_INTERACTION],[VULNERABILITY]",100
-,,,,3. We do not monitor for intrusions.,,,"[HIGH_INTERACTION],[VULNERABILITY]",100
+,,,,2. We manually review logs for suspicious activity. ,,,"[HIGH_INTERACTION],[VULNERABILITY],[HONEYNET]",100
+,,,,3. We do not monitor for intrusions.,,,"[HIGH_INTERACTION],[VULNERABILITY],[HONEYNET]",100
 ,TRUE,,Does your organization have a dedicated security team?,"1. Yes, we have a cybersecurity team.",[HONEYNET],10,,
 ,,,,"2. Yes, we rely on third-party providers.",,,,
-,,,,"3. No, our IT team handles security, but it is not specialized.",[LOW_INTERACTION],10,,
-,,,,4. No one reviews security.,[HONEYTOKEN],20,,
+,,,,"3. No, our IT team handles security, but it is not specialized.",[LOW_INTERACTION],10,"[HIGH_INTERACTION],[VULNERABILITY],[HONEYNET]",100
+,,,,4. No one reviews security.,[HONEYTOKEN],20,"[HIGH_INTERACTION],[VULNERABILITY],[HONEYNET]",100
 ,TRUE,,Is your organization willing to allocate monetary resources into honeypot deployment?,1. Yes. ,"[HONEYNET],[HIGH_INTERACTION]",20,,
 ,,,,"2. No, we work under a limited budget. ","[LOW_INTERACTION],[HONEYTOKEN]",20,[HONEYNET],10
 ,TRUE,,"Does your organization prefer to detect attackers when they first try access the network, while moving around inside, or when they attempt to achieve their final goal (e.g. exfiltrating, destroying critical data, disrupting operations, etc.)?

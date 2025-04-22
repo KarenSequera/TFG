@@ -45,7 +45,7 @@ class Questionnaire extends Component {
         if (answer.tagsAdd) {
             answer.tagsAdd.forEach(tags => {
                 let indexes = this.getHoneypotMatchingTags(tags);
-                this.addPointsToHoneypots(indexes, answer.pointsToAdd);
+                this.addPointsToHoneypots(indexes, answer.getPointsToAdd());
             });
         }
 
@@ -53,7 +53,7 @@ class Questionnaire extends Component {
         if (answer.tagsSubtract) {
             answer.tagsSubtract.forEach(tags => {
                 let indexes = this.getHoneypotMatchingTags(tags);
-                this.subtractPointsToHoneypots(indexes, answer.pointsToSubtract);
+                this.subtractPointsToHoneypots(indexes, answer.getPointsToSubtract());
             });
         }
         
@@ -71,7 +71,7 @@ class Questionnaire extends Component {
        // Not all the questions are active, so we need to find the next active question
         let nextQuestion = this.state.currentQuestion + 1;
         this.setState((prevState) => ({ questionCount: prevState.questionCount + 1 }));
-        while( nextQuestion < this.questions.length && !this.questions[nextQuestion].active){
+        while( nextQuestion < this.questions.length && !this.questions[nextQuestion].isActive()){
             nextQuestion++;
         }
 

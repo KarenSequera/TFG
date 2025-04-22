@@ -2,11 +2,10 @@
  * Represents an answer of a question. 
  */
 class Answer {
-  #tagsAdd 
+
   #pointsToAdd 
-  #tagsSubtract 
   #pointsToSubtract
-  #tagsQuestion 
+
   /**
    * Creates a new Answer instance.
    * @param {Object} params - The parameters for the Answer.
@@ -26,35 +25,18 @@ class Answer {
     tagsQuestion = [],
   }) {
     this.text = text;
-    this.#tagsAdd = tagsAdd;
+    this.tagsAdd = tagsAdd;
     this.#pointsToAdd = pointsToAdd;
-    this.#tagsSubtract = tagsSubtract;
+    this.tagsSubtract = tagsSubtract;
     this.#pointsToSubtract = pointsToSubtract;
-    this.#tagsQuestion = tagsQuestion;
+    this.tagsQuestion = tagsQuestion;
   }
-  
-   /**
-   * Returns the tags that define which honeypots to add points 
-   * @returns {string[]} - An array of tags to add.
-   */
-  getTagsAdd(){
-    return this.#tagsAdd.flat();
-  }
-
   /**
    * Returns the amount of points to add
    * @returns {int} - The amount of points to add
    */
   getPointsToAdd(){
     return this.#pointsToAdd;
-  }
-
-  /**
-   * Returns the tags that define which honeypots to subtract points from
-   * @returns {string[]} - An array of tags to subtract.
-   */
-  getTagsSubtract(){
-    return this.#tagsSubtract.flat();
   }
 
  /**
@@ -64,15 +46,6 @@ class Answer {
   getPointsToSubtract(){
     return this.#pointsToSubtract;
   }
-
-/**
-   * Returns the tags that define which questions to activate
-   * @returns {string[]} - An array of tags
-   */
-  getTagsQuestion(){
-    return this.#tagsQuestion.flat();
-  }
-
 }  
   
   export default Answer;
