@@ -32,7 +32,7 @@ class Question {
 
   /**
    * Returns whether the question is active or not
-   * @returns 
+   * @returns {bool} 
    */
   isActive(){
     return this.#active;
