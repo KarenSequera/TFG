@@ -90,21 +90,21 @@ class Questionnaire extends Component {
         }
         
         //At the end of submit answer, top honeypots are recalculated (in sthis way the questionnaire can be finished at any moment with the cheat)
+        this.setTopHoneypots();
+    };
+
+    setTopHoneypots = () =>{
         const sortedHoneypots = [...this.#honeypots].sort((a, b) => b.currentScore - a.currentScore);
         this.#topHoneypots = [];
         sortedHoneypots.forEach((honeypot) => {
             if (this.#topHoneypots.length < 3) {
-                // Iterate through the honeypots that are to be recommended and makes sure that they have at least two different tags, in this way the recommended honeypots are not too similar
                 const isDifferent = this.#topHoneypots.every((selectedHoneypot) => {
                     const currentHoneypotTags = honeypot.tags.flat();
                     const selectedHoneypotTags = selectedHoneypot.tags.flat();
-                    let differentTags = []
-                    differentTags.push(currentHoneypotTags.filter(tag => !selectedHoneypotTags.includes(tag)))
-                    differentTags.push(selectedHoneypotTags.filter(tag => !currentHoneypotTags.includes(tag)))
-                    differentTags = differentTags.flat()
-                    //console.log("Tags in current honeypot", currentHoneypotTags)
-                    //console.log("Tags in selected honeypot", selectedHoneypotTags)
-                    //console.log("Difference", differentTags)
+                    let differentTags = [];
+                    differentTags.push(currentHoneypotTags.filter(tag => !selectedHoneypotTags.includes(tag)));
+                    differentTags.push(selectedHoneypotTags.filter(tag => !currentHoneypotTags.includes(tag)));
+                    differentTags = differentTags.flat();
                     return differentTags.length > 3;
                 });
                 if (isDifferent) {
@@ -114,7 +114,6 @@ class Questionnaire extends Component {
         });
         this.#topHoneypots = this.#topHoneypots.sort((a, b) => b.currentScore - a.currentScore);
         console.log("Top Honeypots:", this.#topHoneypots);
-
     };
 
     // ANSWER OPERATION FUNCTIONS ////////////////////////////////////////
