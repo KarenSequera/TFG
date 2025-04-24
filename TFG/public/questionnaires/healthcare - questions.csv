@@ -1,0 +1,93 @@
+Tags,QuestionActive,EnableQuestionTags,Questions,Answer,AddPointsHoneypotTags,PointsToAdd,SubtractPointsHoneypotTags,PointsToSubtract
+,TRUE,,How many employees does the organization have?,1. Between 1 and 9 employees.,[LOW_INTERACTION],10,,
+,,,,2. Between 50 and 249 employees.,"[CORPORATION,PII],[CORPORATION,INSIDER_THREAT]",10,,
+,,,,3. More than 250 employees.,"[CORPORATION,PII],[CORPORATION,INSIDER_THREAT],[CORPORATION,PHISHING],[HONEYNET]",10,,
+,TRUE,[HCP],Is your organization directly involved in patient care?,1. Yes.,,,,
+,,[PHARM],,"2. No, we are a pharmaceutical /laboratory.",,,,
+,TRUE,,What infrastructure model does your organization follow?,1. Fully Cloud.,,,"[CORPORATION,ON_PREM]",100
+,,,,2. On-Premise.,,,"[CORPORATION,CLOUD]",100
+,,,,3. Hybrid.,,,"[CORPORATION,CLOUD]",100
+,TRUE,,What email services does your company employ?,1. Free email services.,"[CORPORATION,SPAMTRAP]",10,,
+,,,,2. Own email server.,"[CORPORATION,MAILSERVER]",10,,
+,,,,3. Email-as-a-Service.,"[CORPORATION,SPAMTRAP]",10,,
+,,,,4. We do not use mail services.,,,"[CORPORATION,PHISHING]",100
+,TRUE,,Do your employees own work devices?,1. Yes.,"[CORPORATION,EMPLOYEE_ENDPOINT]",10,,
+,,,,"2. No, they use their personal devices.","[CORPORATION,REMOTE_ACCESS]",10,"[CORPORATION,EMPLOYEE_ENDPOINT]",100
+,TRUE,,Do your employees remotely access the organization's resources?,"1. Yes, through a secure access method.",,,,
+,,,,"2. Yes, directly over the internet.","[CORPORATION,REMOTE_ACCESS]",10,,
+,,,,"3. No, employees cannot access remotely.",,,"[CORPORATION,REMOTE_ACCESS]",100
+,TRUE,,Does your organization monitor unauthorized access by employees or contractors?,"1. Yes, we have an insider risk management program and employ strong controls, like RBAC and the least privileged access.",,,,
+,,,,"2. No, we do not.","[CORPORATION,INSIDER_THREAT]",10,,
+,TRUE,,"Does your organization deal with sensitive corporate information? (e.g. IP, patents, research...)",1. Yes. ,"[CORPORATION,SCI]",10,,
+,,,,2. No. ,,,,
+,TRUE,,Does your organization have web services?,"1. Yes, we host and manage our own web services. ","[CORPORATION,WEB_SERVICES]",10,,
+,,,,"2. Yes, but we rely on third-party providers. ",,,"[CORPORATION,WEB_SERVICES]",100
+,,,,"3. No, we do not have web services. ",,,"[CORPORATION,WEB_SERVICES]",100
+,TRUE,,Does your organization frequently update IT devices/systems?,"1. Yes, we have a regular update and replacement cycle.",,,"[CORPORATION,VULNERABILITY]",10
+,,,,2. Rarely/Never. We have legacy software and equipment.,"[CORPORATION,VULNERABILITY]",10,,
+,TRUE,,Does your organization change default unsecure configurations of IT devices/systems? (e.g. passwords),"1. Yes, always. ",,,"[CORPORATION,MISCONFIGURATION]",10
+,,,,2. Rarely/Never. It is likely that we have misconfigured devices. ,"[CORPORATION,MISCONFIGURATION]",10,,
+,TRUE,,Does your organization segment its network?,"1. Yes, with strict internal segmentation.",,,,
+,,,,"2. Yes, some segmentation.",,,,
+,,,,3. The entire network is accessible internally.,"[CORPORATION,LATERAL_MOVEMENT]",10,"[CORPORATION,VULNERABILITY]",100
+,TRUE,,What is the most impactful security event your organization has suffered?,1. Ransomware.,[RANSOMWARE],10,,
+,,,,2. Social engineering.,"[CORPORATION,PHISHING],[CORPORATION,LATERAL_MOVEMENT]",10,,
+,,,,3. Threats against data.,"[CORPORATION,DATA_LEAKS]",10,,
+,,,,4. Insider threats.,"[CORPORATION,INSIDER_THREAT]",10,,
+,,,,5. None of the above. ,,,,
+[HCP],FALSE,[HCPIOT],"Does your organization have networked medical devices (e.g. life support machines, ECGs, X-ray scanners, CT scanners, MRIs)?","1. Yes, we have them. But they are secured and isolated from the main IT network. ",,,,
+,,[HCPIOT],,"2. Yes, we have them. They are connected to the same network as corporate IT.  ","[HCP,LATERAL_MOVEMENT],[HCP,IOT]",10,,
+,,,,"3. No, we do not have.",,,"[HCP,IOT]",100
+[HCPIOT],FALSE,,Does your organization handle end-of-life networked medical devices with known vulnerabilities?,"1. Yes, we employ strict policies and replace outdated hardware wherever possible. ",,,"[HCP,IOT,VULNERABILITY]",10
+,,,,"2. No, we continue using them without additional security measures. ","[HCP,IOT,VULNERABILITY]",10,,
+[HCPIOT],FALSE,,Are medical connected medical devices unsecure default configurations changed? (e.g. passwords),1. Yes.,,,"[HCP,IOT,MISCONFIGURATION]",10
+,,,,2. No.,"[HCP,IOT,MISCONFIGURATION]",10,,
+,,,,3. Not sure.,"[HCP,IOT,MISCONFIGURATION]",10,,
+[HCPIOT],FALSE,,What kind of networked medical devices are more popular in your network?,"1. Patient Monitoring Devices (e.g. blood pressure, heart rate, and ECG).","[HCP,IOT,MONITORING]",10,,
+,,,,2. Diagnostic and Imaging devices (e.g. MRI and X-Ray).,"[HCP,IOT,IMAGING]",10,,
+,,,,3. Stationary devices (e.g. life support machines and automated dosing equipment).,"[HCP,IOT,STATIONARY]",10,,
+[HCPIOT],FALSE,,Has your organization ever suffered any security incident that originated from networked medical devices?,"1. Yes, and it reached other IT resources","[HCP,LATERAL_MOVEMENT],[HCP,IOT]",10,,
+,,,,"2. Yes, but we detected and blocked it before it caused more significant damage. ","[HCP,IOT]",10,,
+,,,,"3. No, we have never experienced such an incident. ",,,,
+[HCP],FALSE,,Does your organization store patient information?,"1. Yes, we store and process patient information in our electronic health record system. ","[HCP,DATA_LEAKS]",10,,
+,,,,"2. Yes, we use third-party services to store and process patient data.",,,"[HCP,DATA_LEAKS]",100
+,,,,"3. No, we do not store patient information. ",,,"[HCP,DATA_LEAKS]",100
+[PHARM],FALSE,[PHARMICS],"Does your organization employ OT and ICS (e.g. medical equipment fabrication, pharmaceutical manufacturing or others)?",1. Yes.,,,,
+,,,,2. No. ,,,[ICS],100
+[PHARMICS],FALSE,,Does your organization separate IT and OT networks?,"1. Yes, with strict segmentation with firewalls and DMZ. ","[ICS,DMZ]",10,,
+,,,,"2. Partially, there are some shared resources. ","[ICS,LATERAL_MOVEMENT]",10,,
+,,,,3. IT and OT are interconnected without isolation.,"[ICS,L2],[ICS,LATERAL_MOVEMENT]",10,,
+,,,,4. Not sure.,"[ICS,L2]",10,,
+[PHARMICS],FALSE,,How is remote access to the ICS system performed?,1. Remote access is strictly monitored and secure. ,,,,
+,,,,2. Directly accessible via the internet. ,"[ICS,RAS],[ICS,LATERAL_MOVEMENT]",10,,
+,,,,3. Remote access is not allowed.,,,"[ICS,RAS]",100
+,,,,4. Not sure.,"[ICS,RAS]",10,,
+[PHARMICS],FALSE,,Are ICS devices' unsecure default configurations changed? (e.g. passwords),1. Yes.,,,"[ICS,MISCONFIGURATION]",10
+,,,,2. No.,"[ICS,MISCONFIGURATION]",10,,
+,,,,3. Not sure.,"[ICS,MISCONFIGURATION]",10,,
+[PHARMICS],FALSE,,Are ICS devices regularly updated?,"1. Yes, we have a regular update and replacement cycle.",,,"[ICS,VULNERABILITY]",10
+,,,,"2. No/Rarely, we have legacy software and equipment.","[ICS,VULNERABILITY]",10,,
+[PHARMICS],FALSE,[ICSBREACH],Has your ICS system ever been breached or compromised?,1. Yes. ,[ICS],10,,
+,,,,"2. No, because we detected them and remediated them. ",,,[ICS],10
+[ICSBREACH],FALSE,,Which components were the most affected during the breach? ,1.  IT services.,"[ICS,L3]",10,,
+,,,,"2.  Control Systems (SCADA, HMI...).","[ICS,L2],[ICS,LATERAL_MOVEMENT]",10,,
+,,,,"3.  Process systems controlers (RTU, PLC...).","[ICS,L1],[ICS,LATERAL_MOVEMENT]",10,,
+,,,,"4.  Process themselves (sensors, drives, actuators, robots...).","[ICS,LATERAL_MOVEMENT]",10,,
+[PHARM],FALSE,[PHARMIOT],Does your organization have smart laboratory devices (e.g. smart centrifuges or refrigerators directly connected to the network)?,"1. Yes, we have them. But they are secured and isolated from the main IT network. ",,,,
+,,[PHARMIOT],,"2. Yes, we have them. ","[PHARMACY,LATERAL_MOVEMENT],[PHARMACY,IOT]",,,
+,,,,"3. No, we do not have.",,,"[PHARMACY,IOT]",100
+[PHARMIOT],,,Does your organization manage the lifecycle of these smart laboratory devices?,"1. Laboratory IoT are regularly updated, patched and replaced when obsolete.",,,,
+,,,,"2. IoT is maintained until failure, with minimal focus on lifecycle security. ",,,"[PHARMACY,IOT]",10
+,TRUE,,How does your organization detect network intrusions?,1. We employ SIEM and/or IDS/IPS for real-time log integration and monitoring. ,,,,
+,,,,2. We manually review logs for suspicious activity. ,,,"[HIGH_INTERACTION],[VULNERABILITY],[HONEYNET]",100
+,,,,3. We do not monitor for intrusions.,,,"[HIGH_INTERACTION],[VULNERABILITY],[HONEYNET]",100
+,TRUE,,Does your organization have a dedicated security team?,"1. Yes, we have a cybersecurity team.",[HONEYNET],10,,
+,,,,"2. Yes, we rely on third-party providers.",,,,
+,,,,"3. No, our IT team handles security, but it is not specialized.",[LOW_INTERACTION],10,"[HIGH_INTERACTION],[VULNERABILITY],[HONEYNET]",100
+,,,,4. No one reviews security.,[HONEYTOKEN],20,"[HIGH_INTERACTION],[VULNERABILITY],[HONEYNET]",100
+,TRUE,,Is your organization willing to allocate monetary resources into honeypot deployment?,1. Yes. ,"[HONEYTOKEN],[HIGH_INTERACTION]",20,,
+,,,,"2. No, we work under a limited budget. ",[LOW_INTERACTION],20,[HONEYNET],10
+,TRUE,,"Does your organization prefer to detect attackers when they first try access the network, while moving around inside, or when they attempt to achieve their final goal (e.g. exfiltrating, destroying critical data, disrupting operations, etc.)?
+",1. We want to prioritize detections of attackers triying to enter our network perimeter. ,[INITIAL_ACCESS],20,,
+,,,,2. We want to prioritize detections of attackers navigating through the network .,[LATERAL_MOVEMENT],20,,
+,,,,3. We want to prioritize detections of attackers when they attempt to damage our organization. ,[IMPACT],20,,

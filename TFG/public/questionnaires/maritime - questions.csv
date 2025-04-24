@@ -1,0 +1,84 @@
+Tags,QuestionActive,EnableQuestionTags,Questions,Answer,AddPointsHoneypotTags,PointsToAdd,SubtractPointsHoneypotTags,PointsToSubtract
+,TRUE,,How many employees does the organization have?,1. Between 1 and 9 employees.,[LOW_INTERACTION],10,,
+,,,,2. Between 50 and 249 employees.,"[CORPORATION,PII],[CORPORATION,INSIDER_THREAT]",10,,
+,,,,3. More than 250 employees.,"[CORPORATION,PII],[CORPORATION,INSIDER_THREAT],[CORPORATION,PHISHING],[HONEYNET]",10,,
+,TRUE,,What infrastructure model does your organization follow?,1. Fully Cloud.,,,"[CORPORATION,ON_PREM]",100
+,,,,2. On-Premise.,,,"[CORPORATION,CLOUD]",100
+,,,,3. Hybrid.,,,"[CORPORATION,CLOUD]",100
+,TRUE,,"Does your organization deal with sensitive corporate information? (e.g. IP, strategic plans, trade secrets...)",1. Yes. ,"[CORPORATION,SCI]",10,,10
+,,,,2. No. ,,,,
+,TRUE,,What email services does your company employ?,1. Free email services.,"[CORPORATION,SPAMTRAP]",10,,
+,,,,2. Own email server.,"[CORPORATION,MAILSERVER]",10,,
+,,,,3. Email-as-a-Service.,"[CORPORATION,SPAMTRAP]",10,,
+,,,,4. We do not use mail services.,,,"[CORPORATION,PHISHING]",100
+,TRUE,,Do your employees own work devices?,1. Yes.,"[CORPORATION,EMPLOYEE_ENDPOINT]",10,,
+,,,,"2. No, they use their personal devices.","[CORPORATION,REMOTE_ACCESS]",10,"[CORPORATION,EMPLOYEE_ENDPOINT]",100
+,TRUE,,Do your employees remotely access the organization's resources?,"1. Yes, through a secure access method.",,,,
+,,,,"2. Yes, directly over the internet.","[CORPORATION,REMOTE_ACCESS]",10,,
+,,,,"3. No, employees cannot access remotely.",,,"[CORPORATION,REMOTE_ACCESS]",100
+,TRUE,,Does your organization monitor unauthorized access by employees or contractors?,"1. Yes, we have an insider risk management program and employ strong controls, like RBAC and the least privileged access.",,,,
+,,,,"2. No, we do not.","[CORPORATION,INSIDER_THREAT]",10,,
+,TRUE,,Does your organization have web services?,"1. Yes, we host and manage our own web services. ","[CORPORATION,WEB_SERVICES]",10,,
+,,,,"2. Yes, but we rely on third-party providers. ",,,"[CORPORATION,WEB_SERVICES]",100
+,,,,"3. No, we do not have web services. ",,,"[CORPORATION,WEB_SERVICES]",100
+,TRUE,,How does your organization handle database management?,1. We host and manage our own databases. ,"[CORPORATION, DATABASE]",10,,
+,,,,2. We rely on third-party providers. ,,,,
+,,,,"3. No, we do not have databases. ",,,"[CORPORATION, DATABASE]",100
+,TRUE,[IOT],"Does your port, ship, or maritime infrastructure utilize IoT devices or systems directly connected to the Internet?","1. Yes, we have devices in our infrastructure that are connected to the Internet.",,,,
+,,,,2. Our maritime infrastructure is not connected to the Internet.,,,[IOT],100
+[IOT],FALSE,,How are these connected devices handled?,1. They are publicly accessible through the internet. We do not employ controls.,[IOT],10,,
+,,,,"2. They are correctly secured, segmented from other IT systems, and have strict access controls.",,,,
+,TRUE,,Which category best describes your organization?,1. Port authority/operator.,,,[SHIP],100
+,,,,2. Fleet operator.,,,[PORT],100
+,,[FLEET_PORT],,3. Fleet and port operator. ,,,,
+,,,,4. Other,,,"[SHIP],[PORT]",100
+,TRUE,[ICS],"Does your organization employ Industrial Control Systems (ICS) such as ship navigation systems, port automation, cargo handling systems, or others?","1. Yes, we employ them. ",,,,
+,,,,2. No we do not. ,,,[ICS],100
+[ICS],FALSE,,Does your organization separate IT and OT networks?,"1. Yes, with strict segmentation with firewalls and DMZ. ","[ICS,DMZ]",10,,
+,,,,"2. Partially, there are some shared resources. ","[ICS,LATERAL_MOVEMENT]",10,,
+,,,,3. IT and OT are interconnected without isolation.,"[ICS,L2],[ICS,LATERAL_MOVEMENT]",10,,
+,,,,4. Not sure.,"[ICS,L2]",10,,
+[ICS],FALSE,,How is remote access to the ICS system performed?,1. Remote access is strictly monitored and secure. ,,,,
+,,,,2. Directly accessible via the internet. ,"[ICS,RAS],[ICS,LATERAL_MOVEMENT]",10,,
+,,,,3. Remote access is not allowed.,,,"[ICS,RAS]",100
+,,,,4. Not sure.,"[ICS,RAS]",10,,
+[ICS],FALSE,,Are ICS devices' unsecure default configurations changed? (e.g. passwords),1. Yes.,,,"[ICS,MISCONFIGURATION]",10
+,,,,2. No.,"[ICS,MISCONFIGURATION]",10,,
+,,,,3. Not sure.,"[ICS,MISCONFIGURATION]",10,,
+[ICS],FALSE,,Are ICS devices and components regularly updated?,"1. Yes, we have a regular update and replacement cycle.",,,"[ICS,VULNERABILITY]",10
+,,,,"2. No/Rarely, we have legacy software and equipment.","[ICS,VULNERABILITY]",10,,
+[ICS],FALSE,[ICS_BREACH],Has your ICS system ever been breached or compromised?,1. Yes. ,[ICS],10,,
+,,,,"2. No, because we detected them and remediated them. ",,,[ICS],10
+[ICS_BREACH],FALSE,,Which components were the most affected during the breach? ,1.  IT services.,"[ICS,L3]",10,,
+,,,,"2.  Control Systems (SCADA, HMI...).","[ICS,L2],[ICS,LATERAL_MOVEMENT]",10,,
+,,,,"3.  Process systems controlers (RTU, PLC...).","[ICS,L1],[ICS,LATERAL_MOVEMENT]",10,,
+,,,,"4.  Process themselves (sensors, drives, actuators, robots...).","[ICS,LATERAL_MOVEMENT]",10,,
+,TRUE,,Does your organization frequently update IT devices/systems?,"1. Yes, we have a regular update and replacement cycle.",,,[VULNERABILITY],10
+,,,,2. Rarely/Never. We have legacy software and equipment.,[VULNERABILITY],10,,
+,TRUE,,Does your organization change default unsecure configurations of IT devices/systems? (e.g. passwords),"1. Yes, always. ",,,[MISCONFIGURATION],10
+,,,,2. Rarely/Never. It is likely that we have misconfigured devices. ,[MISCONFIGURATION],10,,
+,TRUE,,Does your organization segment its network?,"1. Yes, with strict internal segmentation.",,,,
+,,,,"2. Yes, some segmentation.",[LATERAL_MOVEMENT],10,,
+,,,,3. The entire network is accessible internally.,[LATERAL_MOVEMENT],10,[VULNERABILITY],100
+,TRUE,,How does your organization detect network intrusions?,1. We employ SIEM and/or IDS/IPS for real-time log integration and monitoring. ,,,,
+,,,,2. We manually review logs for suspicious activity. ,[LOW_INTERACTION],10,"[HIGH_INTERACTION],[VULNERABILITY],[HONEYNET]",100
+,,,,3. We do not monitor for intrusions.,[HONEYTOKEN],10,"[HIGH_INTERACTION],[VULNERABILITY],[HONEYNET]",100
+,TRUE,,Does your organization have a dedicated security team?,"1. Yes, we have a cybersecurity team.",[HONEYNET],10,,
+,,,,"2. Yes, we rely on third-party providers.",,,,
+,,,,"3. No, our IT team handles security, but it is not specialized.",[LOW_INTERACTION],10,"[HIGH_INTERACTION],[VULNERABILITY],[HONEYNET]",100
+,,,,4. No one reviews security.,[HONEYTOKEN],10,"[HIGH_INTERACTION],[VULNERABILITY],[HONEYNET]",100
+,TRUE,,Is your organization willing to allocate monetary resources into honeypot deployment?,1. Yes. ,"[HONEYNET],[HIGH_INTERACTION]",10,,
+,,,,"2. No, we work under a limited budget. ","[LOW_INTERACTION],[HONEYTOKEN]",10,,
+,TRUE,,"When does your organization prefer to detect attackers: at initial access, during lateral movement, or at their final objective (e.g., data theft or disruption)?",1. We want to prioritize the detection of attackers trying to enter our network perimeter. ,[INITIAL_ACCESS],20,[HONEYNET],10
+,,,,2. We want to prioritize detections of attackers navigating through the network ,[LATERAL_MOVEMENT],20,,
+,,,,3. We want to prioritize detections of attackers when they attempt to damage our organization. ,[IMPACT],20,,
+[FLEET_PORT],FALSE,,Which systems does your organization prefer to prioritize?,1. We want to prioritize the protection of threats related to ship systems.,[SHIP],20,,
+,,,,2. We want to prioritize the protection of threats related to port systems.,[PORT],20,,
+,TRUE,,Which systems does your organization prefer to prioritize?,1. We want to prioritize the protection of threats related to corporate systems.,[CORPORATION],20,,
+,,,,2. We want to prioritize protecting against threats related to maritime ICS infrastructure.,[ICS],20,,
+,,,,3. We want to prioritize protecting against threats related to maritime infrastructure's connected devices and IoT.,"[SHIP,IOT],[PORT,IOT]",20,,
+,TRUE,,What's the most impactful security event your organization has suffered? (Choose one or more),1. Ransomware.,[RANSOMWARE],20,,
+,,,,2. Social Engineering.,[PHISHING],20,,
+,,,,3. Threats against data.,[DATA_LEAKS],20,,
+,,,,6. Insider Threats.,[INSIDER_THREAT],20,,
+,,,,7. Non-of the above. ,,,,

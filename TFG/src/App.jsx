@@ -49,9 +49,7 @@ function App() {
       return setStage('transportSelection');
     }
 
-    //TODO: Erase this line once all sectors have been implemented
-    selectedSector = 'energy';
-    setSector(selectedSector); // Set the selected sector
+    setSector(selectedSector); 
 
     try {
         // Fetch data
@@ -151,7 +149,7 @@ function App() {
         <div className="sector-selection-content">
           <h1>Transport Selection</h1>
           <p>Please select the transport subsector your organization belongs to:</p>
-          <button className="button-sector" onClick={() => handleSectorSelected('aviation')}>aviation</button>
+          <button className="button-sector" onClick={() => handleSectorSelected('aviation')}>Aviation</button>
           <button className="button-sector" onClick={() => handleSectorSelected('road')}>Road</button>
           <button className="button-sector" onClick={() => handleSectorSelected('railway')}>Railway</button>
           <button className="button-sector" onClick={() => handleSectorSelected('maritime')}>Maritime</button>

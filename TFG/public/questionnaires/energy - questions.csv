@@ -21,7 +21,7 @@ Tags,QuestionActive,EnableQuestionTags,Questions,Answer,AddPointsHoneypotTags,Po
 ,,,,"3. No, employees cannot access remotely.",,,"[CORPORATION,REMOTE_ACCESS]",100
 ,TRUE,,Does your organization monitor unauthorized access by employees or contractors?,"1. Yes, we have an insider risk management program and employ strong controls, like RBAC and the least privileged access.",,,,
 ,,,,"2. No, we do not.","[CORPORATION,INSIDER_THREAT]",10,,
-,TRUE,,"Does your organization deal with really sensitive information corporate information? (e.g. IP, trade secrets...)",1. Yes. ,"[CORPORATION,SCI]",10,,
+,TRUE,,"Does your organization deal with sensitive corporate information? (e.g. IP, trade secrets...)",1. Yes. ,"[CORPORATION,SCI]",10,,
 ,,,,2. No. ,,,,
 ,TRUE,,Does your organization store customer information?,"1. Yes, we store and process customer information internally.","[CORPORATION,DATABASE_CUSTOMER]",10,,
 ,,,,"2. Yes, we use third-party services to store and process customer data.",,,"[CORPORATION,DATABASE_CONSUMER]",100
