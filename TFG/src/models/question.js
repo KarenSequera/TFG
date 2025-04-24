@@ -1,4 +1,4 @@
-import Answer from "./Answer.js";
+import Answer from "./answer.js";
 /**
  * Represents a Question in the questionnaire.
  */
@@ -23,6 +23,7 @@ class Question {
     this.answers = answers;
     this.#active = active;
   }
+  
   /**
    * Activates the question
   */

@@ -1,7 +1,7 @@
 import Papa from 'papaparse';
-import Honeypot from '../models/Honeypot.js';
-import Question from '../models/Question.js';
-import Answer from '../models/Answer.js';
+import Honeypot from '../models/honeypot.js';
+import Question from '../models/question.js';
+import Answer from '../models/answer.js';
 /**
  * This funtion parses the TAGS to lists of lists according the pattern used in the CSV: "[TAG1,TAG2],[TAG3,TAG4]"
  * @param {string} tags - string containing the TAGS data
